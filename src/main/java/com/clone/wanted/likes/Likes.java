@@ -12,7 +12,6 @@ public class Likes {
     /*Todo User, Employment FK 값 develop 에 머지 후 오류 해결되는지 확인*/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="likeId")
     private int likeId;
 
     @ManyToOne
@@ -23,7 +22,6 @@ public class Likes {
     @JoinColumn(name="employmentId")
     private Employment employment;
 
-    @Column(name="likeStatus")
     private Boolean likeStatus;
 
 
