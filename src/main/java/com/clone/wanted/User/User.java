@@ -1,6 +1,5 @@
 package com.clone.wanted.User;
 
-<<<<<<< HEAD
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -59,7 +58,4 @@ public class User {
 
 	@Column(name = "userType", length = 10)
 	private UserType userType;
-=======
-public class User {
->>>>>>> 2462d170b14ebb1137f8e89794c810f90985ad83
 }
