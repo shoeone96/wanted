@@ -1,1 +1,12 @@
+server:
+  port: 8080
 
+spring:
+  application:
+    name: wanted
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/wanted
+    username: root
+    password: qwer1234
+    driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
