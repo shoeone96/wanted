@@ -6,24 +6,24 @@ import lombok.Getter;
 
 @Entity
 @Getter
-@Table(name="likes")
+@Table(name="Likes")
 public class Likes {
 
     /*Todo User, Employment FK 값 develop 에 머지 후 오류 해결되는지 확인*/
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    @Column(name="like_id")
+    @Column(name="likeId")
     private int likeId;
 
     @ManyToOne
-    @JoinColumn(name="user_id")
+    @JoinColumn(name="userId")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="employment_id")
+    @JoinColumn(name="employmentId")
     private Employment employment;
 
-    @Column(name="like_status")
+    @Column(name="likeStatus")
     private Boolean likeStatus;
 
 
