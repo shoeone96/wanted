@@ -12,14 +12,12 @@ public class EmploymentHashtag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="employment_Hashtag_id")
     private int employmentHashtagId;
 
     @ManyToOne
-    @JoinColumn(name="employment_id")
+    @JoinColumn(name="employmentId")
     private Employment employment;
 
-    @Column(name="hashtag_name")
     private String hashtagName;
 
 }

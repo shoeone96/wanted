@@ -23,25 +23,21 @@ public class Employment {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="employment_id")
     private int employmentId;
 
 
     @ManyToOne
-    @JoinColumn(name="company_id")
+    @JoinColumn(name="companyId")
     private Company company;
 
-    @Column(name="employment_title")
     private String employmentTitle;
 
-    @Column(name="employment_contents")
     private String employmentContents;
 
     private String address;
 
     private LocalDateTime deadline;
 
-    @Column(name="employment_reward")
     private int employmentReward;
 
     private String position;
