@@ -11,11 +11,11 @@ import lombok.NoArgsConstructor;
 public class Company {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "company_Id")
+	@Column(name = "company_id")
 	private Long companyId;
 
 	@ManyToOne
-	@JoinColumn(name = "userId", referencedColumnName = "userId")
+	@JoinColumn(name = "user_id", referencedColumnName = "user_id")
 	private User user;
 
 	@Column(name = "companyName", length = 100)
