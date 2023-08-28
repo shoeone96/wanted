@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 public class Skill {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "skillId")
+    @Column(name = "skill_id")
     private Long id;
     @Column(length = 20)
     private String skillName;
