@@ -8,6 +8,7 @@ import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
 import java.time.DateTimeException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
@@ -36,7 +37,7 @@ public class Employment {
 
     private String address;
 
-    private LocalDateTime deadline;
+    private LocalDate deadline;
 
     private int employmentReward;
 
