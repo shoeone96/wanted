@@ -15,7 +15,8 @@ wanted 플랫폼 서버 클론코딩(java spring 기반)
 
  
 ## watned-ER-diagram
-![wanted ER diagram (1)](https://github.com/shoeone96/wanted/assets/85065626/a7dd5fc4-f7dc-4372-a793-acfe1262ac45)
+![wanted ER diagram (2)](https://github.com/shoeone96/wanted/assets/85065626/fc0bd498-022a-43e7-935b-cfe3b50b8c22)
+
 
 
 
