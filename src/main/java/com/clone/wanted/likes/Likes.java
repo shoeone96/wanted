@@ -15,11 +15,11 @@ public class Likes {
     private int likeId;
 
     @ManyToOne
-    @JoinColumn(name="userId")
+    @JoinColumn(name="user_id")
     private User user;
 
     @ManyToOne
-    @JoinColumn(name="employmentId")
+    @JoinColumn(name="employment_id")
     private Employment employment;
 
     private Boolean likeStatus;
