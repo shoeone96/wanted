@@ -27,7 +27,7 @@ public class Employment {
 
 
     @ManyToOne
-    @JoinColumn(name="companyId")
+    @JoinColumn(name="company_id")
     private Company company;
 
     private String employmentTitle;

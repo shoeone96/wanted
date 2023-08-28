@@ -15,7 +15,7 @@ public class EmploymentHashtag {
     private int employmentHashtagId;
 
     @ManyToOne
-    @JoinColumn(name="employmentId")
+    @JoinColumn(name="employment_id")
     private Employment employment;
 
     private String hashtagName;
