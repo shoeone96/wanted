@@ -1,3 +1,5 @@
+package com.clone.wanted.config;
+
 import lombok.Getter;
 import org.springframework.http.HttpStatus;
 
@@ -60,7 +62,7 @@ public enum BaseResponseStatus {
         this.message = message;
     }
 
-    BaseResponseStatus(int code, String message,HttpStatus status) {
+    BaseResponseStatus(int code, String message, HttpStatus status) {
         this.code = code;
         this.message = message;
         this.status=status;
