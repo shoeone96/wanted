@@ -6,7 +6,16 @@ spring:
     name: wanted
 
   datasource:
-    url: jdbc:mysql://localhost:3306/wanted
-    username: root
-    password: qwer1234
+    url: jdbc:mysql://localhost:3306/${DB_DATABASE_NAME}
+    username: ${DB_USERNAME}
+    password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
+  jpa:
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+    show-sql: true
+    hibernate:
+      ddl-auto: create-drop
+    properties:
+      hibernate:
+        format_sql: true

@@ -1,5 +1,6 @@
 package com.clone.wanted.skill;
 
+import com.clone.wanted.employment.Employment;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -10,12 +11,12 @@ import lombok.NoArgsConstructor;
 public class EmploymentSkill {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "EmploymentSkillId")
+    @Column(name = "Employment_skill_id")
     private Long id;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "skillId")
+    @JoinColumn(name = "skill_id")
     private Skill skill;
     @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "employmentId")
+    @JoinColumn(name = "employment_id")
     private Employment employment;
 }

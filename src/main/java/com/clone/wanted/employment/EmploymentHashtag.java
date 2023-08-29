@@ -7,14 +7,14 @@ import lombok.NoArgsConstructor;
 @Entity
 @Getter
 @NoArgsConstructor
-@Table(name="EmploymentHashtag")
 public class EmploymentHashtag {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int employmentHashtagId;
+    @Column(name = "employmnet_hashtag_id")
+    private Long id;
 
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="employment_id")
     private Employment employment;
 
