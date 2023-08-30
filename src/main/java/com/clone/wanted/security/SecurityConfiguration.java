@@ -29,33 +29,56 @@ public class SecurityConfiguration {
 		return new BCryptPasswordEncoder();
 	}
 
+//	@Bean
+//	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
+//		httpSecurity.csrf(AbstractHttpConfigurer::disable).exceptionHandling(Customizer.withDefaults())
+//				.authenticationEntryPoint(jwtAuthenticationEntryPoint)
+//				.accessDeniedHandler(jwtAccessDeniedHandler)
+//
+//				// enable h2-console
+//				.and()
+//				.headers()
+//				.frameOptions()
+//				.sameOrigin()
+//
+//				// 세션을 사용하지 않기 때문에 STATELESS로 설정
+//				.and().sessionManagement()
+//				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+//
+//				.and().authorizeHttpRequests() // HttpServletRequest를 사용하는 요청들에 대한 접근제한을 설정하겠다.
+//				.requestMatchers("/api/authenticate").permitAll() // 로그인 api
+//				.requestMatchers("/api/signup").permitAll() // 회원가입 api
+//				.requestMatchers(PathRequest.toH2Console()).permitAll()// h2-console, favicon.ico 요청 인증 무시
+//				.requestMatchers("/favicon.ico").permitAll()
+//				.anyRequest().authenticated() // 그 외 인증 없이 접근X
+//
+//				.and()
+//				.apply(new JwtSecurityConfig(tokenProvider)); // JwtFilter를 addFilterBefore로 등록했던 JwtSecurityConfig class 적용
+//
+//		return httpSecurity.build();
+//	}
+
 	@Bean
 	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-		httpSecurity.csrf(AbstractHttpConfigurer::disable).exceptionHandling(Customizer.withDefaults())
-				.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-				.accessDeniedHandler(jwtAccessDeniedHandler)
+		return httpSecurity
+				//csrf 공격에 대한 옵션 끄기
+				.csrf(AbstractHttpConfigurer::disable)
+				.authorizeHttpRequests((auuthorizeRequest) -> {
+					auuthorizeRequest.requestMatchers("/user/**").authenticated();
 
-				// enable h2-console
-				.and()
-				.headers()
-				.frameOptions()
-				.sameOrigin()
+					auuthorizeRequest.requestMatchers("/manager/**")
+							.hasAnyRole("ADMIN", "MANAGER");
 
-				// 세션을 사용하지 않기 때문에 STATELESS로 설정
-				.and().sessionManagement()
-				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+					auuthorizeRequest.requestMatchers("/admin/**")
+							.hasRole("ADMIN");
 
-				.and().authorizeHttpRequests() // HttpServletRequest를 사용하는 요청들에 대한 접근제한을 설정하겠다.
-				.requestMatchers("/api/authenticate").permitAll() // 로그인 api
-				.requestMatchers("/api/signup").permitAll() // 회원가입 api
-				.requestMatchers(PathRequest.toH2Console()).permitAll()// h2-console, favicon.ico 요청 인증 무시
-				.requestMatchers("/favicon.ico").permitAll()
-				.anyRequest().authenticated() // 그 외 인증 없이 접근X
+					auuthorizeRequest.anyRequest().permitAll();
+				})
 
-				.and()
-				.apply(new JwtSecurityConfig(tokenProvider)); // JwtFilter를 addFilterBefore로 등록했던 JwtSecurityConfig class 적용
-
-		return httpSecurity.build();
+				.formLogin((formLogin) -> {
+					formLogin.loginPage("/login");
+				})
+				.build();
 	}
 }
 

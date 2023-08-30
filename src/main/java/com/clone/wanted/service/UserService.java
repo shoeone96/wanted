@@ -5,11 +5,10 @@ import com.clone.wanted.utils.SecurityUtil;
 import com.clone.wanted.User.User;
 import com.clone.wanted.repository.UserRepository;
 import com.clone.wanted.dto.UserDto;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-
+import org.springframework.transaction.annotation.Transactional;
 import java.util.Collections;
 import java.util.Optional;
 
@@ -36,7 +35,6 @@ public class UserService {
 		User user = User.builder()
 				.username(userDto.getUsername())
 				.password(passwordEncoder.encode(userDto.getPassword()))
-				.nickname(userDto.getNickname())
 				.authorities(Collections.singleton(authority))
 				.activated(true)
 				.build();

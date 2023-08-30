@@ -20,3 +20,7 @@ spring:
     properties:
       hibernate:
         format_sql: true
+jwt:
+  header: Authorization
+  secret: TestToken1234
+  token-validity-in-seconds: 86400
