@@ -23,8 +23,8 @@ public class GlobalExceptionHandler {
 
     //예외 전역 처리
     /*TODO 로그 파일 생성하기*/
-    @ExceptionHandler(value = RuntimeException.class)
-    public BaseResponse ExceptionHandler(RuntimeException e) {
+    @ExceptionHandler(value = Exception.class)
+    public BaseResponse ExceptionHandler(Exception e) {
         //log.error("MethodArgumentNotValidException", e);
         return new BaseResponse(GlOBAL_EXCEPTION);
     }
