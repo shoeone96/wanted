@@ -24,6 +24,7 @@ public class EmploymentService {
     //채용공고 생성
     public void createEmployment (EmploymentReqDto employmentReqDto){
         long companyId = employmentReqDto.getCompanyId();
+        //람다식으로 예외처리 해보기 + 옵셔널 사용방법 찾아보기
         Company company = companyRepository.findById(companyId).get();
 
         Employment employment = new Employment(company, employmentReqDto);
