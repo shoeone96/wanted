@@ -1,8 +1,8 @@
-package com.clone.wanted.employment;
+package com.clone.wanted.Company;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public interface EmploymentRepository extends JpaRepository<Employment,Long> {
+public interface CompanyRepository extends JpaRepository<Company,Long> {
 }
