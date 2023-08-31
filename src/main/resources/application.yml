@@ -22,5 +22,5 @@ spring:
         format_sql: true
 jwt:
   header: Authorization
-  secret: TestToken1234
+  secret: TestToken1234sadhfkjahlui3421o4798fshjkasdf
   token-validity-in-seconds: 86400

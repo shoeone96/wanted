@@ -1,5 +1,6 @@
 package com.clone.wanted.repository;
 
+import com.clone.wanted.User.Authority;
 import com.clone.wanted.User.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 

@@ -11,17 +11,19 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 public class UserController {
 	private final UserService userService;
 
-	@PostMapping("/signup")
+	// 회원가입
+	@PostMapping("/users/join")
 	public ResponseEntity<User> signup(
 			@Valid @RequestBody UserDto userDto
 	) {
 		return ResponseEntity.ok(userService.signup(userDto));
 	}
 
+	// 이메일 체크 기능
 	@GetMapping("/user")
 	@PreAuthorize("hasAnyRole('USER','ADMIN')")
 	public ResponseEntity<User> getMyUserInfo() {

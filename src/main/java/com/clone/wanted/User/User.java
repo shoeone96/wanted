@@ -4,7 +4,6 @@ import com.clone.wanted.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
-import org.springframework.boot.autoconfigure.elasticsearch.ElasticsearchConnectionDetails;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.time.LocalDate;

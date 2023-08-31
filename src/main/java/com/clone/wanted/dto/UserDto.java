@@ -1,9 +1,15 @@
 package com.clone.wanted.dto;
 
+import com.clone.wanted.User.Authority;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import jakarta.persistence.Basic;
 import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 import lombok.*;
+import com.clone.wanted.User.UserType;
+import java.time.LocalDate;
 
 @Getter
 @Setter
@@ -12,16 +18,43 @@ import lombok.*;
 @NoArgsConstructor
 public class UserDto {
 
-	@NotNull
-	@Size(min = 3, max = 50)
 	private String username;
-
-	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-	@NotNull
-	@Size(min = 3, max = 100)
 	private String password;
+	private String name;
+	private String email;
+	private String phoneNumber;
+	private LocalDate birthDate;
+	private String jobStatus;
+	private String jobGroup;
+	private UserType userType;
 
 //	@NotNull
 //	@Size(min = 3, max = 50)
-//	private String nickname;
+//	private String username;
+//
+//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
+//	@NotNull
+//	@Size(min = 3, max = 100)
+//	private String password;
+
+//	@NotNull
+//	private String name;
+//
+//	@NotNull
+//	private String email;
+//
+//	@NotNull
+//	private String phoneNumber;
+//
+//	@NotNull
+//	private LocalDate birthDate;
+//
+//	@Null
+//	private String jobStatus;
+//
+//	@Null
+//	private String jobGroup;
+//
+//	@NotNull
+//	private UserType userType;
 }

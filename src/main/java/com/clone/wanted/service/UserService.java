@@ -1,6 +1,7 @@
 package com.clone.wanted.service;
 
 import com.clone.wanted.User.Authority;
+import com.clone.wanted.repository.AuthorityRepository;
 import com.clone.wanted.utils.SecurityUtil;
 import com.clone.wanted.User.User;
 import com.clone.wanted.repository.UserRepository;
@@ -16,6 +17,7 @@ import java.util.Optional;
 @RequiredArgsConstructor
 public class UserService {
 	private final UserRepository userRepository;
+	private final AuthorityRepository authorityRepository;
 	private final PasswordEncoder passwordEncoder;
 
 
@@ -35,10 +37,18 @@ public class UserService {
 		User user = User.builder()
 				.username(userDto.getUsername())
 				.password(passwordEncoder.encode(userDto.getPassword()))
+				.name(userDto.getName())
+				.email(userDto.getEmail())
+				.phoneNumber(userDto.getPhoneNumber())
+				.birthDate(userDto.getBirthDate())
+				.jobStatus(userDto.getJobStatus())
+				.jobGroup(userDto.getJobGroup())
+				.userType(userDto.getUserType())
 				.authorities(Collections.singleton(authority))
 				.activated(true)
 				.build();
 
+//		AuthorityRepository.save(authority);
 		return userRepository.save(user);
 	}
 
