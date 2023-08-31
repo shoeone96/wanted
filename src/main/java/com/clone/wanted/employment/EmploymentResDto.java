@@ -5,6 +5,8 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
@@ -17,9 +19,11 @@ public class EmploymentResDto {
     private int recommenderReward;
     private long companyId;
     private String companyName;
+    private int likeNum;
+    private List<String> hashtagName;
 
 
-    public EmploymentResDto(Employment employment,Company company) {
+    public EmploymentResDto(Employment employment,Company company,int likeNum,List<String> hashtagName) {
         this.employmentId = employment.getId();
         this.employmentTitle = employment.getEmploymentTitle();
         this.address = employment.getAddress();
@@ -28,5 +32,7 @@ public class EmploymentResDto {
         this.recommenderReward = employment.getRecommenderReward();
         this.companyId = company.getId();
         this.companyName = company.getCompanyName();
+        this.likeNum = likeNum;
+        this.hashtagName = hashtagName;
     }
 }
