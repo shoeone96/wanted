@@ -13,4 +13,5 @@ interface ApplicationRepository extends JpaRepository<Application, Long> {
 
     Optional<Application> findByUserAndEmployment(User suer, Employment employment);
     List<Application> findAllByUser(User user);
+    List<Application> findAllByEmployment(Employment employment);
 }
