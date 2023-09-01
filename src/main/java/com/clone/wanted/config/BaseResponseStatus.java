@@ -49,12 +49,13 @@ public enum BaseResponseStatus {
     /**
      * 6000 : Employment Exception
      */
-    Employment_NOT_FOUND(false, 6000, "해당 공고를 찾을 수 없습니다."),
+    EMPLOYMENT_NOT_FOUND(false, 6000, "해당 공고를 찾을 수 없습니다."),
 
     /**
      * 7000 : Employment Exception
      */
-    APPLICATION_ALREADY_EXIST(false, 7000, "이미 지원한 공고입니다.");
+    APPLICATION_ALREADY_EXIST(false, 7000, "이미 지원한 공고입니다."),
+    APPLICATION_NOT_EXIST(false, 7000, "지원 내역이 존재하지 않습니다.");
 
 
     private boolean isSuccess;
