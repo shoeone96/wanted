@@ -2,6 +2,7 @@ package com.clone.wanted.application;
 
 import com.clone.wanted.User.User;
 import com.clone.wanted.User.UserRepository;
+import com.clone.wanted.User.UserType;
 import com.clone.wanted.application.requestDto.EstimateRequestDto;
 import com.clone.wanted.config.BaseException;
 import com.clone.wanted.config.BaseResponseStatus;
@@ -34,6 +35,7 @@ public class ApplicationService {
     public void estimate(String email, EstimateRequestDto requestDto, Long employmentId) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+        if(user.getUserType() == UserType.CORPORATE_USER) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
         Employment employment = employmentRepository.findById(employmentId)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
         Application application = applicationRepository.findByUserAndEmployment(user, employment)
