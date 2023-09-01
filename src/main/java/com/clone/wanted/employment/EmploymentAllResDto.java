@@ -1,32 +1,32 @@
 package com.clone.wanted.employment;
 
+
 import com.clone.wanted.Company.Company;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class EmploymentResDto {
+public class EmploymentAllResDto {
+
     private long employmentId;
     private String employmentTitle;
-    private String address;
-    private String deadline;
-    private int applicantReward;
-    private int recommenderReward;
+    private int rewardSum;
     private long companyId;
     private String companyName;
+    private String region;
 
 
-    public EmploymentResDto(Employment employment,Company company) {
+    public EmploymentAllResDto(Employment employment, Company company,int rewardSum) {
         this.employmentId = employment.getId();
         this.employmentTitle = employment.getEmploymentTitle();
-        this.address = employment.getAddress();
-        this.deadline = employment.getDeadline();
-        this.applicantReward = employment.getApplicantReward();
-        this.recommenderReward = employment.getRecommenderReward();
+        this.rewardSum = rewardSum;
         this.companyId = company.getId();
         this.companyName = company.getCompanyName();
+        this.region = company.getRegion();
     }
 }
