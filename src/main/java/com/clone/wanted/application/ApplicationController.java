@@ -1,6 +1,7 @@
 package com.clone.wanted.application;
 
 import com.clone.wanted.application.requestDto.EstimateRequestDto;
+import com.clone.wanted.application.responseDto.CompanyApplicationResponseDto;
 import com.clone.wanted.application.responseDto.UserApplicationResponseDto;
 import com.clone.wanted.config.BaseResponse;
 import lombok.RequiredArgsConstructor;
@@ -39,5 +40,10 @@ public class ApplicationController {
     @GetMapping("api/v1/applications")
     public BaseResponse<List<UserApplicationResponseDto>> getUserApplicationList(@RequestBody String email){
         return BaseResponse.success(applicationService.getUserApplications(email));
+    }
+
+    @GetMapping("api/v1/applications/{employmentId}")
+    public BaseResponse<List<CompanyApplicationResponseDto>> getCompanyApplicationList(@RequestBody String email, @PathVariable Long employmentId){
+        return BaseResponse.success(applicationService.getCompanyApplications(email, employmentId));
     }
 }
