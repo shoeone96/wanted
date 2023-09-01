@@ -56,7 +56,12 @@ public enum BaseResponseStatus {
      * 7000 : Employment Exception
      */
     APPLICATION_ALREADY_EXIST(false, 7000, "이미 지원한 공고입니다."),
-    APPLICATION_NOT_EXIST(false, 7000, "지원 내역이 존재하지 않습니다.");
+    APPLICATION_NOT_EXIST(false, 7001, "지원 내역이 존재하지 않습니다."),
+
+    /**
+     * 8000 : Employment Exception
+     */
+    COMPANY_NOT_FOUND(false, 8000, "해당 유저가 관리하는 회사 정보가 없습니다.");
 
 
     private boolean isSuccess;
