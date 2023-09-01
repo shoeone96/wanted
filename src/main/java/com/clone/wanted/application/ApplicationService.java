@@ -42,4 +42,14 @@ public class ApplicationService {
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
         application.updateStatus(ApplicationStatus.returnStatus(requestDto.getApplicationStatus()));
     }
+
+    public void cancel(String email, Long employmentId) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+        Employment employment = employmentRepository.findById(employmentId)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
+        Application application = applicationRepository.findByUserAndEmployment(user, employment)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
+        application.updateStatus(ApplicationStatus.CANCEL);
+    }
 }
