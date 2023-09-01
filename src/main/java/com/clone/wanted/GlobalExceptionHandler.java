@@ -27,7 +27,7 @@ public class GlobalExceptionHandler {
     @ResponseStatus(HttpStatus.NOT_FOUND)
     @ExceptionHandler(value = Exception.class)
     public BaseResponse ExceptionHandler(Exception e) {
-        //log.error("MethodArgumentNotValidException", e);
+        log.error("MethodArgumentNotValidException", e);
         return new BaseResponse(GlOBAL_EXCEPTION);
     }
 

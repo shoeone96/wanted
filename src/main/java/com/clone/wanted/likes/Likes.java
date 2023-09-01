@@ -29,5 +29,14 @@ public class Likes {
     private Boolean likeStatus;
 
 
+    public Likes(User user, Employment employment, Boolean likeStatus) {
+        this.user = user;
+        this.employment = employment;
+        this.likeStatus = likeStatus;
+    }
 
+
+    public void modifyLikes(Boolean likeStatus){
+        this.likeStatus = likeStatus;
+    }
 }
