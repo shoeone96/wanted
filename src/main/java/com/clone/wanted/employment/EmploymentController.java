@@ -28,11 +28,14 @@ public class EmploymentController {
     @GetMapping("/employments/{employmentId}")
     public BaseResponse<EmploymentDetailResDto> retrieveEmployment(@PathVariable("employmentId") long employmentId) throws Exception {
         EmploymentDetailResDto employmentResDto = employmentService.retrieveEmployment(employmentId);
+
+        if(true){
+            throw new Exception();
+        }
         return new BaseResponse<> (employmentResDto);
     }
 
     //채용 공고 전체조회
-    /**Todo 좋아요 수 컬럼으로 추가해서 반환하기*/
     @GetMapping("/employments")
     public BaseResponse<List<EmploymentAllResDto>> retrieveAllEmployment() throws Exception {
         List<EmploymentAllResDto> employmentResDtoList = employmentService.retrieveAllEmployment();
