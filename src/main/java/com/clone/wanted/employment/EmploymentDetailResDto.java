@@ -10,7 +10,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
-public class EmploymentResDto {
+public class EmploymentDetailResDto {
     private long employmentId;
     private String employmentTitle;
     private String address;
@@ -22,8 +22,8 @@ public class EmploymentResDto {
     private int likeNum;
     private List<String> hashtagName;
 
-
-    public EmploymentResDto(Employment employment,Company company,int likeNum,List<String> hashtagName) {
+    //상세 조회 생성자
+    public EmploymentDetailResDto(Employment employment,Company company,int likeNum,List<String> hashtagName) {
         this.employmentId = employment.getId();
         this.employmentTitle = employment.getEmploymentTitle();
         this.address = employment.getAddress();
@@ -35,4 +35,6 @@ public class EmploymentResDto {
         this.likeNum = likeNum;
         this.hashtagName = hashtagName;
     }
+
+
 }

@@ -20,6 +20,7 @@ public class EmploymentService {
 
     private final EmploymentRepository employmentRepository;
     private final CompanyRepository companyRepository;
+    private final EmploymentHashtagRepository employmentHashtagRepository;
 
     //채용공고 생성
     public void createEmployment (EmploymentReqDto employmentReqDto){
@@ -31,36 +32,37 @@ public class EmploymentService {
 
         employmentRepository.save(employment);
     }
+
     //채용공고 상세 조회
-    public EmploymentResDto retrieveEmployment(@PathVariable long employmentId) {
+    public EmploymentDetailResDto retrieveEmployment(@PathVariable long employmentId) {
         Employment employment = employmentRepository.findById(employmentId).get();
         Company company = employment.getCompany();
-
         //임시 like Num
         int likeNum=5;
 
-        List<String> hashtagName=new ArrayList<>();
-        EmploymentResDto employmentResDto = new EmploymentResDto(employment,company,likeNum,hashtagName);
+        List<String> hashtagName = employmentHashtagRepository.findHashtagName(employmentId);
+
+        EmploymentDetailResDto employmentResDto = new EmploymentDetailResDto(employment,company,likeNum,hashtagName);
 
         return employmentResDto;
     }
 
     //채용공고 전체 조회
-    public List<EmploymentResDto> retrieveAllEmployment() {
+    public List<EmploymentAllResDto> retrieveAllEmployment() {
         List<Employment> employmentList = employmentRepository.findAll();
 
-        //employmentList employmentsResDtoList로 변환하기
-        ArrayList<EmploymentResDto> employmentResDtoList = new ArrayList<>();
-
+        //employmentList employmentsAllResDtoList로 변환하기
+        ArrayList<EmploymentAllResDto> employmentResDtoList = new ArrayList<>();
         for(int i=0;i<employmentList.size();i++){
             Employment employment = employmentList.get(i);
             Company company = employment.getCompany();
+            int applicantReward = employment.getApplicantReward();
+            int recommenderReward = employment.getRecommenderReward();
+            int rewardSum=applicantReward+recommenderReward;
 
-            int likeNum=5;
+            EmploymentAllResDto employmentResDto = new EmploymentAllResDto(employment, company,rewardSum);
 
-            List<String> hashtagName=new ArrayList<>();
-
-            EmploymentResDto employmentResDto = new EmploymentResDto(employment,company,likeNum,hashtagName);
+            employmentResDtoList.add(employmentResDto);
 
         } //변환 끝
 
