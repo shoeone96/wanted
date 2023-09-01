@@ -1,9 +1,12 @@
 package com.clone.wanted.application;
 
 import com.clone.wanted.application.requestDto.EstimateRequestDto;
+import com.clone.wanted.application.responseDto.UserApplicationResponseDto;
 import com.clone.wanted.config.BaseResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
@@ -31,5 +34,10 @@ public class ApplicationController {
     public BaseResponse<Void> cancel(@RequestBody String email, @PathVariable Long employmentId){
         applicationService.cancel(email, employmentId);
         return BaseResponse.success();
+    }
+
+    @GetMapping("api/v1/applications")
+    public BaseResponse<List<UserApplicationResponseDto>> getUserApplicationList(@RequestBody String email){
+        return BaseResponse.success(applicationService.getUserApplications(email));
     }
 }
