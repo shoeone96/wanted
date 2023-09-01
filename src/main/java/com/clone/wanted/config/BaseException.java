@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 @NoArgsConstructor
 
 @ResponseStatus(code= HttpStatus.NOT_FOUND)
-public class BaseException extends Exception {
+public class BaseException extends RuntimeException {
     private BaseResponseStatus status;  //BaseResoinseStatus 객체에 매핑
 
 }

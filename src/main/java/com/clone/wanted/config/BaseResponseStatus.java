@@ -36,11 +36,25 @@ public enum BaseResponseStatus {
      * 4000 : Database, Server 오류
      */
     DATABASE_ERROR(false, 4000, "데이터베이스 연결에 실패하였습니다."),
-    SERVER_ERROR(false, 4001, "서버와의 연결에 실패하였습니다.");
+    SERVER_ERROR(false, 4001, "서버와의 연결에 실패하였습니다."),
 
 
     /*TODO 필요한 에러 메세지 추가해주세요- 하비 */
+    /**
+     * 5000 : User Exception
+     */
+    USER_NOT_FOUND(false, 5000, "해당 유저를 찾을 수 없습니다."),
 
+
+    /**
+     * 6000 : Employment Exception
+     */
+    Employment_NOT_FOUND(false, 6000, "해당 공고를 찾을 수 없습니다."),
+
+    /**
+     * 7000 : Employment Exception
+     */
+    APPLICATION_ALREADY_EXIST(false, 7000, "이미 지원한 공고입니다.");
 
 
     private boolean isSuccess;
