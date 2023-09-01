@@ -8,6 +8,7 @@ import com.clone.wanted.employment.EmploymentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
@@ -42,9 +43,23 @@ public class LikesService {
             likesFalse.modifyLikes(true);
             likesRepository.save(likesFalse);
         }
-
-
-
-
     }
+
+//    public LikesResDto retrieveLikes(long employmentId,long userId){
+//
+//
+//
+//        return
+//    }
+
+
+    public int getLikeNum(long employmentId){
+        int likeNum = likesRepository.getLikeNum(employmentId);
+        return likeNum;
+    }
+
+
+
+
+
 }

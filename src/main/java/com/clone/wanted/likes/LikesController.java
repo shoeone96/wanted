@@ -3,10 +3,7 @@ package com.clone.wanted.likes;
 
 import com.clone.wanted.config.BaseResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,6 +19,22 @@ public class LikesController {
         likesService.changeLikes(employmentId,userId);
 
         return new BaseResponse<>();
+    }
+
+//    @GetMapping("/employment/{employmentId}/likes")
+//    public BaseResponse<LikesResDto> retrieveLikes(@PathVariable long employmentId){
+//        //UserId 임시값
+//        long userId=1;
+//        likesService.retrieveLikes(employmentId,userId);
+//
+//        return new BaseResponse<>();
+//    }
+
+
+    @GetMapping("/employment/{employmentId}/likes1")
+    public int getLikes(@PathVariable long employmentId){
+        //UserId 임시
+        return likesService.getLikeNum(employmentId);
     }
 
 
