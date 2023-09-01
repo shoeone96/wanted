@@ -44,6 +44,7 @@ public enum BaseResponseStatus {
      * 5000 : User Exception
      */
     USER_NOT_FOUND(false, 5000, "해당 유저를 찾을 수 없습니다."),
+    REQUEST_NOT_ALLOWED(false, 5001, "해당 기능을 사용할 권한이 없습니다."),
 
 
     /**
