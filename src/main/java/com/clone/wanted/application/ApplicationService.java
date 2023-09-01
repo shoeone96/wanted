@@ -27,7 +27,9 @@ public class ApplicationService {
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
         applicationRepository.findByUserAndEmployment(user, employment)
                 .ifPresent((application -> {
-                    throw new BaseException(BaseResponseStatus.APPLICATION_ALREADY_EXIST);
+                    if(application.getApplicationStatus() == ApplicationStatus.CANCEL) {
+                        application.updateStatus(ApplicationStatus.ONGOING);
+                    } else throw new BaseException(BaseResponseStatus.APPLICATION_ALREADY_EXIST);
                 }));
         applicationRepository.save(Application.newEnrollment(user, employment));
     }
