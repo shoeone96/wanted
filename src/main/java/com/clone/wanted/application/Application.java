@@ -32,6 +32,10 @@ public class Application extends BaseEntity {
         this.applicationStatus = ApplicationStatus.ONGOING;
     }
 
+    public void updateStatus(ApplicationStatus status){
+        this.applicationStatus = status;
+    }
+
     public static Application newEnrollment(User user, Employment employment){
         return new Application(user, employment);
     }
