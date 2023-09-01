@@ -4,6 +4,7 @@ import com.clone.wanted.User.User;
 import com.clone.wanted.User.UserRepository;
 import com.clone.wanted.User.UserType;
 import com.clone.wanted.application.requestDto.EstimateRequestDto;
+import com.clone.wanted.application.responseDto.UserApplicationResponseDto;
 import com.clone.wanted.config.BaseException;
 import com.clone.wanted.config.BaseResponseStatus;
 import com.clone.wanted.employment.Employment;
@@ -11,6 +12,8 @@ import com.clone.wanted.employment.EmploymentRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -53,5 +56,14 @@ public class ApplicationService {
         Application application = applicationRepository.findByUserAndEmployment(user, employment)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
         application.updateStatus(ApplicationStatus.CANCEL);
+    }
+
+    public List<UserApplicationResponseDto> getUserApplications(String email) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+        return applicationRepository.findAllByUser(user)
+                .stream()
+                .map(UserApplicationResponseDto::of)
+                .toList();
     }
 }
