@@ -26,4 +26,10 @@ public class ApplicationController {
         applicationService.estimate(email, requestDto, employmentId);
         return BaseResponse.success();
     }
+
+    @PatchMapping("api/v1/applications/{employmentId}/cancel")
+    public BaseResponse<Void> cancel(@RequestBody String email, @PathVariable Long employmentId){
+        applicationService.cancel(email, employmentId);
+        return BaseResponse.success();
+    }
 }
