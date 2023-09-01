@@ -29,9 +29,7 @@ public class EmploymentController {
     public BaseResponse<EmploymentDetailResDto> retrieveEmployment(@PathVariable("employmentId") long employmentId) throws Exception {
         EmploymentDetailResDto employmentResDto = employmentService.retrieveEmployment(employmentId);
 
-        if(true){
-            throw new Exception();
-        }
+
         return new BaseResponse<> (employmentResDto);
     }
 
