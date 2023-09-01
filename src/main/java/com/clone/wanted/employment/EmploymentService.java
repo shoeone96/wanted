@@ -36,7 +36,11 @@ public class EmploymentService {
         Employment employment = employmentRepository.findById(employmentId).get();
         Company company = employment.getCompany();
 
-        EmploymentResDto employmentResDto = new EmploymentResDto(employment, company);
+        //임시 like Num
+        int likeNum=5;
+
+        List<String> hashtagName=new ArrayList<>();
+        EmploymentResDto employmentResDto = new EmploymentResDto(employment,company,likeNum,hashtagName);
 
         return employmentResDto;
     }
@@ -51,7 +55,13 @@ public class EmploymentService {
         for(int i=0;i<employmentList.size();i++){
             Employment employment = employmentList.get(i);
             Company company = employment.getCompany();
-            employmentResDtoList.add(new EmploymentResDto(employment,company));
+
+            int likeNum=5;
+
+            List<String> hashtagName=new ArrayList<>();
+
+            EmploymentResDto employmentResDto = new EmploymentResDto(employment,company,likeNum,hashtagName);
+
         } //변환 끝
 
         return employmentResDtoList;
