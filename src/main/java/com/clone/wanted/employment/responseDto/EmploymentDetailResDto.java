@@ -22,9 +22,10 @@ public class EmploymentDetailResDto {
     private String companyName;
     private int likeNum;
     private List<String> hashtagName;
+    private List<String> skillStack;
 
     //상세 조회 생성자
-    public EmploymentDetailResDto(Employment employment, Company company, int likeNum, List<String> hashtagName) {
+    public EmploymentDetailResDto(Employment employment,Company company,int likeNum,List<String> hashtagName,List<String> skillStack) {
         this.employmentId = employment.getId();
         this.employmentTitle = employment.getEmploymentTitle();
         this.address = employment.getAddress();
@@ -35,6 +36,7 @@ public class EmploymentDetailResDto {
         this.companyName = company.getCompanyName();
         this.likeNum = likeNum;
         this.hashtagName = hashtagName;
+        this.skillStack=skillStack;
     }
 
 
