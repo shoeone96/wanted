@@ -1,22 +1,17 @@
 package com.clone.wanted.likes;
 
 import com.clone.wanted.User.User;
-import com.clone.wanted.User.UserRepository;
-import com.clone.wanted.config.BaseResponse;
 import com.clone.wanted.employment.Employment;
 import com.clone.wanted.employment.EmploymentRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 @Transactional
 @RequiredArgsConstructor
 public class LikesService {
     private final LikesRepository likesRepository;
-    private final UserRepository userRepository;
     private final EmploymentRepository employmentRepository;
 
     public void changeLikes(long employmentId,long userId) {
@@ -24,7 +19,7 @@ public class LikesService {
         try{
             Likes likes = likesRepository.findByUserUserId(userId).get();
         }catch (Exception e){
-            User user = userRepository.findById(userId).get();
+            //User user = userRepository.findById(userId).get();
             Employment employment = employmentRepository.findById(employmentId).get();
             Likes likesSave = new Likes(user, employment, false);
             likesRepository.save(likesSave);
