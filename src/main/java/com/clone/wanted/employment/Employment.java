@@ -40,4 +40,14 @@ public class Employment extends BaseEntity {
         this.recommenderReward = employmentReqDto.getRecommenderReward();
         this.applicantReward = employmentReqDto.getApplicantReward();
     }
+
+
+    public void modifyEmployment(EmploymentReqDto employmentReqDto){
+        this.employmentTitle = employmentReqDto.getEmploymentTitle();
+        this.employmentContents = employmentReqDto.getEmploymentTitle();
+        this.address = employmentReqDto.getAddress();
+        this.deadline = employmentReqDto.getDeadline();
+        this.recommenderReward = employmentReqDto.getRecommenderReward();
+        this.applicantReward = employmentReqDto.getApplicantReward();
+    }
 }

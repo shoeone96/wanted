@@ -27,11 +27,19 @@ public class EmploymentController {
 
 
 
+    //채용공고 수정
+    @PutMapping("/employments/{employmentId}")
+    public BaseResponse updateEmployment(@PathVariable long employmentId, @RequestBody EmploymentReqDto employmentReqDto ) throws Exception{
+        employmentService.updateEmployment(employmentId,employmentReqDto);
+        return new BaseResponse();
+    }
+
+
+
     //채용 공고 상세조회
     @GetMapping("/employments/{employmentId}")
     public BaseResponse<EmploymentDetailResDto> retrieveEmployment(@PathVariable("employmentId") long employmentId) throws Exception {
         EmploymentDetailResDto employmentResDto = employmentService.retrieveEmployment(employmentId);
-
 
         return new BaseResponse<> (employmentResDto);
     }
