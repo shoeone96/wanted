@@ -39,7 +39,7 @@ public class UserService {
 				.password(encoder.encode(signinRequestDto.getPassword()))
 				.name(signinRequestDto.getName())
 				.email(signinRequestDto.getEmail())
-				.userType(signinRequestDto.getUserType())
+				.userType(UserType.returnStatus(signinRequestDto.getUserType()))
 				.phoneNumber(signinRequestDto.getPhoneNumber())
 				.activated(true)
 				.build();
