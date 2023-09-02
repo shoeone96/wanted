@@ -83,6 +83,9 @@ public class EmploymentService {
         return employmentResDtoList;
     }
 
-
+    //채용공고 삭제
+    public void deleteEmployment(long employmentId ) {
+        employmentRepository.deleteById(employmentId);
+    }
 
 }

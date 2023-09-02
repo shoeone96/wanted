@@ -25,16 +25,12 @@ public class EmploymentController {
         return new BaseResponse();
     }
 
-
-
     //채용공고 수정
     @PutMapping("/employments/{employmentId}")
     public BaseResponse updateEmployment(@PathVariable long employmentId, @RequestBody EmploymentReqDto employmentReqDto ) throws Exception{
         employmentService.updateEmployment(employmentId,employmentReqDto);
         return new BaseResponse();
     }
-
-
 
     //채용 공고 상세조회
     @GetMapping("/employments/{employmentId}")
@@ -50,6 +46,16 @@ public class EmploymentController {
         List<EmploymentAllResDto> employmentResDtoList = employmentService.retrieveAllEmployment();
         return new BaseResponse<>(employmentResDtoList);
     }
+
+    //채용공고 삭제
+    @DeleteMapping("/employments/{employmentId}")
+    public BaseResponse deleteEmployment(@PathVariable long employmentId) throws Exception {
+        employmentService.deleteEmployment(employmentId);
+        return new BaseResponse();
+    }
+
+
+
 
 
 }
