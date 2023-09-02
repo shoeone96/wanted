@@ -19,43 +19,38 @@ public class EmploymentController {
 
     //채용 공고 생성
     @PostMapping("/employments")
-    public BaseResponse createEmployment(@RequestBody EmploymentReqDto employmentReqDto) throws Exception {
+    public BaseResponse<Void> createEmployment(@RequestBody EmploymentReqDto employmentReqDto) {
         employmentService.createEmployment(employmentReqDto);
-        // Baseresponse 생성자 만들기
-        return new BaseResponse();
+        return BaseResponse.success();
     }
 
     //채용공고 수정
     @PutMapping("/employments/{employmentId}")
-    public BaseResponse updateEmployment(@PathVariable long employmentId, @RequestBody EmploymentReqDto employmentReqDto ) throws Exception{
+    public BaseResponse<Void> updateEmployment(@PathVariable long employmentId, @RequestBody EmploymentReqDto employmentReqDto ) {
         employmentService.updateEmployment(employmentId,employmentReqDto);
-        return new BaseResponse();
+        return BaseResponse.success();
     }
 
     //채용 공고 상세조회
     @GetMapping("/employments/{employmentId}")
-    public BaseResponse<EmploymentDetailResDto> retrieveEmployment(@PathVariable("employmentId") long employmentId) throws Exception {
+    public BaseResponse<EmploymentDetailResDto> retrieveEmployment(@PathVariable("employmentId") long employmentId) {
         EmploymentDetailResDto employmentResDto = employmentService.retrieveEmployment(employmentId);
-
-        return new BaseResponse<> (employmentResDto);
+        return BaseResponse.success(employmentResDto);
     }
 
     //채용 공고 전체조회
     @GetMapping("/employments")
-    public BaseResponse<List<EmploymentAllResDto>> retrieveAllEmployment() throws Exception {
+    public BaseResponse<List<EmploymentAllResDto>> retrieveAllEmployment() {
         List<EmploymentAllResDto> employmentResDtoList = employmentService.retrieveAllEmployment();
-        return new BaseResponse<>(employmentResDtoList);
+        return BaseResponse.success(employmentResDtoList);
     }
 
     //채용공고 삭제
     @DeleteMapping("/employments/{employmentId}")
-    public BaseResponse deleteEmployment(@PathVariable long employmentId) throws Exception {
+    public BaseResponse<Void> deleteEmployment(@PathVariable long employmentId) {
         employmentService.deleteEmployment(employmentId);
-        return new BaseResponse();
+        return BaseResponse.success();
     }
-
-
-
 
 
 }
