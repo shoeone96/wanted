@@ -30,7 +30,7 @@ public class User extends BaseEntity {
 	//실제 이름
 	@Column(length = 20)
 	private String name;
-	@Column(length = 100)
+	@Column(length = 100, unique = true)
 	private String email;
 	@Column( length = 15)
 	private String phoneNumber;

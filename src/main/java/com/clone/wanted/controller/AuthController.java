@@ -13,23 +13,28 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api")
+@RequestMapping("/api/v1")
 @RequiredArgsConstructor
 public class AuthController {
 	private final TokenProvider tokenProvider;
 	private final AuthenticationManagerBuilder authenticationManagerBuilder;
+	private final PasswordEncoder passwordEncoder;
 
-	@PostMapping("/authenticate")
+	@PostMapping("/users/login")
 	public ResponseEntity<TokenDto> authorize(@Valid @RequestBody LoginDto loginDto) {
 
 		UsernamePasswordAuthenticationToken authenticationToken =
-				new UsernamePasswordAuthenticationToken(loginDto.getUsername(), loginDto.getPassword());
+				new UsernamePasswordAuthenticationToken(loginDto.getEmail(), passwordEncoder.encode(loginDto.getPassword()));
+
+//		UsernamePasswordAuthenticationToken authenticationToken =
+//				new UsernamePasswordAuthenticationToken(loginDto.getEmail(), loginDto.getPassword());
 
 		// authenticate 메소드가 실행이 될 때 CustomUserDetailsService class의 loadUserByUsername 메소드가 실행
 		Authentication authentication = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
@@ -39,6 +44,7 @@ public class AuthController {
 		String jwt = tokenProvider.createToken(authentication);
 
 		HttpHeaders httpHeaders = new HttpHeaders();
+
 		// response header에 jwt token에 넣어줌
 		httpHeaders.add(JwtFilter.AUTHORIZATION_HEADER, "Bearer " + jwt);
 

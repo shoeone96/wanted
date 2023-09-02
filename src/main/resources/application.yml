@@ -14,12 +14,22 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
+    defer-datasource-initialization: true
     hibernate:
 #      ddl-auto: create-drop
-      ddl-auto: update
+#      ddl-auto: update
+    ddl-auto: create-drop
     properties:
       hibernate:
         format_sql: true
+
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+#      data-locations: data.sql
+
+
 jwt:
   header: Authorization
   secret: TestToken1234sadhfkjahlui3421o4798fshjkasdf

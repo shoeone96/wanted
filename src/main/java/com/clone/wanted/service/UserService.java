@@ -1,6 +1,7 @@
 package com.clone.wanted.service;
 
 import com.clone.wanted.User.Authority;
+import com.clone.wanted.User.UserType;
 import com.clone.wanted.repository.AuthorityRepository;
 import com.clone.wanted.utils.SecurityUtil;
 import com.clone.wanted.User.User;
@@ -27,11 +28,20 @@ public class UserService {
 			throw new RuntimeException("이미 가입되어 있는 유저입니다.");
 		}
 
+		Authority authority = null;
 		// 가입되어 있지 않은 회원이면,
 		// 권한 정보 만들고
-		Authority authority = Authority.builder()
-				.authorityName("ROLE_USER")
-				.build();
+		if(userDto.getUserType().equals(UserType.GENERAL)){
+			authority = Authority.builder()
+					.authorityName("GENERAL")
+					.build();
+		}
+		else if(userDto.getUserType().equals(UserType.CORPORATE)) {
+			authority = Authority.builder()
+					.authorityName("CORPORATE")
+					.build();
+		}
+
 
 		// 유저 정보를 만들어서 save
 		User user = User.builder()
@@ -63,5 +73,10 @@ public class UserService {
 	public Optional<User> getMyUserWithAuthorities() {
 		return SecurityUtil.getCurrentUsername()
 				.flatMap(userRepository::findOneWithAuthoritiesByUsername);
+	}
+
+	@Transactional(readOnly = false)
+	public Optional<User> getUserByEmail(String email){
+		return userRepository.findByEmail(email);
 	}
 }

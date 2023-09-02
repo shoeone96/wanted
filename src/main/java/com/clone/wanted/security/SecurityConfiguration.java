@@ -73,6 +73,8 @@ public class SecurityConfiguration {
 							.hasRole("ADMIN");
 
 					auuthorizeRequest.anyRequest().permitAll();
+
+
 				})
 
 				.formLogin((formLogin) -> {
