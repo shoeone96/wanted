@@ -52,5 +52,4 @@ public class EmploymentController {
         return BaseResponse.success();
     }
 
-
 }

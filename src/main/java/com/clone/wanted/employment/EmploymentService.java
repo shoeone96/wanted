@@ -30,7 +30,6 @@ public class EmploymentService {
         long companyId = employmentReqDto.getCompanyId();
         //람다식으로 예외처리 해보기 + 옵셔널 사용방법 찾아보기
         Company company = companyRepository.findById(companyId).get();
-
         Employment employment = new Employment(company, employmentReqDto);
 
         employmentRepository.save(employment);
@@ -50,14 +49,12 @@ public class EmploymentService {
     public EmploymentDetailResDto retrieveEmployment(@PathVariable long employmentId) {
         Employment employment = employmentRepository.findById(employmentId).get();
         Company company = employment.getCompany();
-
         int likeNum=likesRepository.getLikeNum(employmentId);
 
         List<String> hashtagName = employmentRepository.findHashtagName(employmentId);
         List<String> skillStack = employmentRepository.findSkillStackName(employmentId);
 
         EmploymentDetailResDto employmentResDto = new EmploymentDetailResDto(employment,company,likeNum,hashtagName,skillStack);
-
         return employmentResDto;
     }
 
@@ -75,11 +72,9 @@ public class EmploymentService {
             int rewardSum=applicantReward+recommenderReward;
 
             EmploymentAllResDto employmentResDto = new EmploymentAllResDto(employment, company,rewardSum);
-
             employmentResDtoList.add(employmentResDto);
 
         } //변환 끝
-
         return employmentResDtoList;
     }
 
