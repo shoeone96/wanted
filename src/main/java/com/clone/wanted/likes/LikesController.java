@@ -2,6 +2,7 @@ package com.clone.wanted.likes;
 
 
 import com.clone.wanted.config.BaseResponse;
+import com.clone.wanted.likes.responseDto.LikesResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 

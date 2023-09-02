@@ -4,6 +4,8 @@ import com.clone.wanted.User.User;
 import com.clone.wanted.User.UserRepository;
 import com.clone.wanted.employment.Employment;
 import com.clone.wanted.employment.EmploymentRepository;
+import com.clone.wanted.likes.responseDto.LikeModalResDto;
+import com.clone.wanted.likes.responseDto.LikesResDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -45,7 +47,7 @@ public class LikesService {
         }
     }
 
-    public LikesResDto retrieveLikes(long employmentId,long userId) {
+    public LikesResDto retrieveLikes(long employmentId, long userId) {
         List<Object[]> results = likesRepository.getModal(employmentId);
         //dto로 변환
 
