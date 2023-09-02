@@ -35,9 +35,9 @@ public class TokenProvider{
 	}
 
 	// token username 넣고, key는 userName 넣은 값을 암호화, 유효 기간
-	public static String generateToken(String userName, String key, long expiredTimeMs){
+	public static String generateToken(String email, String key, long expiredTimeMs){
 		Claims claims = Jwts.claims();
-		claims.put("nickname", userName);
+		claims.put("email", email);
 
 		return Jwts.builder()
 				.setClaims(claims)
