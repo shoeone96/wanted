@@ -1,6 +1,7 @@
-package com.clone.wanted.likes;
+package com.clone.wanted.likes.responseDto;
 
 
+import com.clone.wanted.likes.responseDto.LikeModalResDto;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

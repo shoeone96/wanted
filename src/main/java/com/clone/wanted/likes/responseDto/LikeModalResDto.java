@@ -1,4 +1,4 @@
-package com.clone.wanted.likes;
+package com.clone.wanted.likes.responseDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
