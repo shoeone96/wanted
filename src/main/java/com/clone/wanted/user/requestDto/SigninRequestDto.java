@@ -14,7 +14,7 @@ public class SigninRequestDto {
 	private String password;
 	private String name;
 	private String email;
-	private UserType userType;
+	private String userType;
 	private String phoneNumber;
 
 }
