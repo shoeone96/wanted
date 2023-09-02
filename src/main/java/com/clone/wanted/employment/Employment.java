@@ -2,7 +2,7 @@ package com.clone.wanted.employment;
 
 
 import com.clone.wanted.BaseEntity;
-import com.clone.wanted.Company.Company;
+import com.clone.wanted.company.Company;
 import com.clone.wanted.employment.requestDto.EmploymentReqDto;
 import jakarta.persistence.*;
 import lombok.Getter;

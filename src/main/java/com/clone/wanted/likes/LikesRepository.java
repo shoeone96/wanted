@@ -1,7 +1,7 @@
 package com.clone.wanted.likes;
 
 
-import com.clone.wanted.employment.EmploymentHashtag;
+import com.clone.wanted.user.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
@@ -12,7 +12,7 @@ import java.util.Optional;
 
 @Repository
 public interface LikesRepository extends JpaRepository<Likes,Long> {
-    Optional<Likes> findByUserUserId(Long UserId);
+    Optional<Likes> findByUser(User user);
 
 
     @Query(value = " select res_tb.user_id, res_tb.name  from (select users.user_id, users.name, likeEm_tb.like_status from (select * from likes where employment_id=:employmentId)AS likeEm_tb join users on users.user_id= likeEm_tb.user_id) AS res_tb where res_tb.like_status=1",nativeQuery = true)

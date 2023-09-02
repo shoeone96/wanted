@@ -1,7 +1,7 @@
 package com.clone.wanted.likes;
 
 
-import com.clone.wanted.User.User;
+import com.clone.wanted.user.User;
 import com.clone.wanted.employment.Employment;
 import jakarta.persistence.*;
 import lombok.Getter;
