@@ -1,6 +1,6 @@
 package com.clone.wanted.employment.responseDto;
 
-import com.clone.wanted.Company.Company;
+import com.clone.wanted.company.Company;
 import com.clone.wanted.employment.Employment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

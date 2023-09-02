@@ -14,8 +14,22 @@ spring:
     database: mysql
     database-platform: org.hibernate.dialect.MySQL8Dialect
     show-sql: true
+    defer-datasource-initialization: true
     hibernate:
-      ddl-auto: update
+#      ddl-auto: create-drop
+#      ddl-auto: update
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
+
+  sql:
+    init:
+      mode: always
+      continue-on-error: true
+#      data-locations: data.sql
+
+jwt:
+  secret-key: ${JWT_KEY}
+  token:
+    expired-time-ms: ${EXPIRATION_TIME}

@@ -1,7 +1,7 @@
 package com.clone.wanted.application;
 
 import com.clone.wanted.BaseEntity;
-import com.clone.wanted.User.User;
+import com.clone.wanted.user.User;
 import com.clone.wanted.employment.Employment;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
@@ -11,7 +11,7 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
-@NoArgsConstructor(access = AccessLevel.PROTECTED)
+@NoArgsConstructor
 public class Application extends BaseEntity {
 
     @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
