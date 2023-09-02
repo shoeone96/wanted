@@ -40,6 +40,9 @@ public class BaseResponse<T> {//BaseResponse 객체를 사용할때 성공, 실�
     public static BaseResponse<Void> success(){
         return new BaseResponse<>();
     }
+    public static <T> BaseResponse<T> success(T result){
+        return new BaseResponse<>(result);
+    }
 
     // 요청에 실패한 경우
     public BaseResponse(BaseResponseStatus status){

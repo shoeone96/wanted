@@ -1,6 +1,7 @@
-package com.clone.wanted.employment;
+package com.clone.wanted.employment.responseDto;
 
 import com.clone.wanted.Company.Company;
+import com.clone.wanted.employment.Employment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -23,7 +24,7 @@ public class EmploymentDetailResDto {
     private List<String> hashtagName;
 
     //상세 조회 생성자
-    public EmploymentDetailResDto(Employment employment,Company company,int likeNum,List<String> hashtagName) {
+    public EmploymentDetailResDto(Employment employment, Company company, int likeNum, List<String> hashtagName) {
         this.employmentId = employment.getId();
         this.employmentTitle = employment.getEmploymentTitle();
         this.address = employment.getAddress();

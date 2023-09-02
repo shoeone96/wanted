@@ -2,13 +2,13 @@ package com.clone.wanted.employment;
 
 import com.clone.wanted.Company.Company;
 import com.clone.wanted.Company.CompanyRepository;
+import com.clone.wanted.employment.requestDto.EmploymentReqDto;
+import com.clone.wanted.employment.responseDto.EmploymentAllResDto;
+import com.clone.wanted.employment.responseDto.EmploymentDetailResDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
