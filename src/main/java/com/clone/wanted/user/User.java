@@ -1,4 +1,4 @@
-package com.clone.wanted.User;
+package com.clone.wanted.user;
 
 import com.clone.wanted.BaseEntity;
 import com.fasterxml.jackson.annotation.JsonIgnore;

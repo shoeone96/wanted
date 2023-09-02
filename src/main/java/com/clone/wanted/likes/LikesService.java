@@ -1,7 +1,7 @@
 package com.clone.wanted.likes;
 
-import com.clone.wanted.User.User;
-import com.clone.wanted.User.UserRepository;
+import com.clone.wanted.user.User;
+import com.clone.wanted.user.UserRepository;
 import com.clone.wanted.employment.Employment;
 import com.clone.wanted.employment.EmploymentRepository;
 import jakarta.transaction.Transactional;

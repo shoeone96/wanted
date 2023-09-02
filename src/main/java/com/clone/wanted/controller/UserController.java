@@ -1,20 +1,16 @@
 package com.clone.wanted.controller;
 
-import com.clone.wanted.User.User;
+import com.clone.wanted.user.User;
 import com.clone.wanted.config.BaseResponse;
 import com.clone.wanted.config.BaseResponseStatus;
 import com.clone.wanted.service.UserService;
 import com.clone.wanted.dto.UserDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Optional;
-
-import static com.clone.wanted.config.BaseResponseStatus.SUCCESS;
 
 @RestController
 @RequiredArgsConstructor

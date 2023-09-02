@@ -1,4 +1,4 @@
-package com.clone.wanted.User;
+package com.clone.wanted.user;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;

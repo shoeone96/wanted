@@ -1,14 +1,10 @@
 package com.clone.wanted.dto;
 
-import com.clone.wanted.User.Authority;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonProperty;
-import jakarta.persistence.Basic;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Null;
 import jakarta.validation.constraints.Size;
 import lombok.*;
-import com.clone.wanted.User.UserType;
+import com.clone.wanted.user.UserType;
 import java.time.LocalDate;
 
 @Getter

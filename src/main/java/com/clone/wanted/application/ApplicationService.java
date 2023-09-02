@@ -1,10 +1,10 @@
 package com.clone.wanted.application;
 
-import com.clone.wanted.Company.Company;
-import com.clone.wanted.Company.CompanyRepository;
-import com.clone.wanted.User.User;
-import com.clone.wanted.User.UserRepository;
-import com.clone.wanted.User.UserType;
+import com.clone.wanted.company.Company;
+import com.clone.wanted.company.CompanyRepository;
+import com.clone.wanted.user.User;
+import com.clone.wanted.user.UserRepository;
+import com.clone.wanted.user.UserType;
 import com.clone.wanted.application.requestDto.EstimateRequestDto;
 import com.clone.wanted.application.responseDto.CompanyApplicationResponseDto;
 import com.clone.wanted.application.responseDto.UserApplicationResponseDto;

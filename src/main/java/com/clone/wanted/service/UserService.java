@@ -1,10 +1,10 @@
 package com.clone.wanted.service;
 
-import com.clone.wanted.User.Authority;
-import com.clone.wanted.User.UserType;
+import com.clone.wanted.user.Authority;
+import com.clone.wanted.user.UserType;
 import com.clone.wanted.repository.AuthorityRepository;
 import com.clone.wanted.utils.SecurityUtil;
-import com.clone.wanted.User.User;
+import com.clone.wanted.user.User;
 import com.clone.wanted.repository.UserRepository;
 import com.clone.wanted.dto.UserDto;
 import lombok.RequiredArgsConstructor;

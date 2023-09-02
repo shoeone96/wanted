@@ -1,6 +1,6 @@
 package com.clone.wanted.service;
 
-import com.clone.wanted.User.User;
+import com.clone.wanted.user.User;
 import com.clone.wanted.repository.UserRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;

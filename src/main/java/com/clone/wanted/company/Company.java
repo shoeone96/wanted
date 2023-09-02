@@ -1,6 +1,6 @@
-package com.clone.wanted.Company;
+package com.clone.wanted.company;
 
-import com.clone.wanted.User.User;
+import com.clone.wanted.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
