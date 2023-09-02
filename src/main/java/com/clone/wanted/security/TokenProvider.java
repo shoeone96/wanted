@@ -19,7 +19,7 @@ public class TokenProvider{
 		return usernameByToken.equals(userName) && !isExpired(token, key);
 	}
 	public static String getUserName(String token, String key){
-		return extractClaims(token, key).get("username", String.class);
+		return extractClaims(token, key).get("email", String.class);
 	}
 
 	// 현재 시간보다 만료 시간이 긴지 아닌지 여부로 토큰 만료 시간 확인

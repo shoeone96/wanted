@@ -50,16 +50,6 @@ public class UserService {
 
 	// 유저,권한 정보를 가져오는 메소드
 
-	public Optional<User> getUserWithAuthorities(String email) {
-		return userRepository.findByEmail(email);
-	}
-
-	// 현재 securityContext에 저장된 username의 정보만 가져오는 메소드
-
-	public Optional<User> getMyUserWithAuthorities() {
-		return SecurityUtil.getCurrentUsername()
-				.flatMap(userRepository::findByEmail);
-	}
 
 	public String getUserByEmail(String email){
 		userRepository.findByEmail(email)
