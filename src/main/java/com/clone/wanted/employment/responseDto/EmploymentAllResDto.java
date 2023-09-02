@@ -1,7 +1,8 @@
-package com.clone.wanted.employment;
+package com.clone.wanted.employment.responseDto;
 
 
 import com.clone.wanted.Company.Company;
+import com.clone.wanted.employment.Employment;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,7 +22,7 @@ public class EmploymentAllResDto {
     private String region;
 
 
-    public EmploymentAllResDto(Employment employment, Company company,int rewardSum) {
+    public EmploymentAllResDto(Employment employment, Company company, int rewardSum) {
         this.employmentId = employment.getId();
         this.employmentTitle = employment.getEmploymentTitle();
         this.rewardSum = rewardSum;
