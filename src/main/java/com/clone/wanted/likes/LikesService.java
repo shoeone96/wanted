@@ -23,8 +23,8 @@ public class LikesService {
     private final EmploymentRepository employmentRepository;
     private final UserRepository userRepository;
 
-    public void changeLikes(long employmentId,long userId) {
-        User user = userRepository.findById(userId)
+    public void changeLikes(long employmentId, String email) {
+        User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
         // 사용자가 첫 좋아요여서 like id가 없는 경우
         try{
@@ -50,7 +50,7 @@ public class LikesService {
         }
     }
 
-    public LikesResDto retrieveLikes(long employmentId, long userId) {
+    public LikesResDto retrieveLikes(long employmentId, String email) {
         List<Object[]> results = likesRepository.getModal(employmentId);
         //dto로 변환
 
