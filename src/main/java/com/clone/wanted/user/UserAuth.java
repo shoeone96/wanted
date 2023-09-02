@@ -48,7 +48,7 @@ public class UserAuth implements UserDetails {
 
     @Override
     public String getUsername() {
-        return null;
+        return this.email;
     }
 
     @Override

@@ -4,12 +4,11 @@ import com.clone.wanted.config.BaseException;
 import com.clone.wanted.config.BaseResponseStatus;
 import com.clone.wanted.user.requestDto.LoginRequestDto;
 import com.clone.wanted.security.TokenProvider;
-import com.clone.wanted.utils.SecurityUtil;
 import com.clone.wanted.user.requestDto.SigninRequestDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import java.util.Optional;
