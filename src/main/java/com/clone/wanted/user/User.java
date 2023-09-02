@@ -12,7 +12,6 @@ import java.util.Set;
 
 @Entity
 @Getter
-@Setter
 @Builder
 @Table(name = "users")
 @NoArgsConstructor
@@ -21,7 +20,7 @@ public class User extends BaseEntity {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "user_id")
-	private Long userId;
+	private Long id;
 	//유저 아이디
 	@Column(unique = true)
 	private String username;
@@ -34,7 +33,7 @@ public class User extends BaseEntity {
 	private String email;
 	@Column( length = 15)
 	private String phoneNumber;
-	private LocalDate birthDate;
+	private String birthDate;
 	@Column(length = 20)
 	private String jobStatus;
 	@Column(length = 30)
@@ -46,14 +45,4 @@ public class User extends BaseEntity {
 	@Column(name = "activated")
 	private boolean activated;
 
-	@ManyToMany
-	@JoinTable(
-			name = "user_authority",
-			joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "user_id")},
-			inverseJoinColumns = {@JoinColumn(name = "authority_name", referencedColumnName = "authority_name")})
-	private Set<Authority> authorities;
-
-	public User(String subject, String s, Collection<? extends GrantedAuthority> authorities) {
-		super();
-	}
 }

@@ -1,8 +1,5 @@
-package com.clone.wanted.dto;
+package com.clone.wanted.user.requestDto;
 
-import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Null;
-import jakarta.validation.constraints.Size;
 import lombok.*;
 import com.clone.wanted.user.UserType;
 import java.time.LocalDate;
@@ -12,14 +9,14 @@ import java.time.LocalDate;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserDto {
+public class SigninRequestDto {
 
 	private String username;
 	private String password;
 	private String name;
 	private String email;
 	private String phoneNumber;
-	private LocalDate birthDate;
+	private String birthDate;
 	private String jobStatus;
 	private String jobGroup;
 	private UserType userType;

@@ -1,5 +1,7 @@
 package com.clone.wanted.likes;
 
+import com.clone.wanted.config.BaseException;
+import com.clone.wanted.config.BaseResponseStatus;
 import com.clone.wanted.user.User;
 import com.clone.wanted.user.UserRepository;
 import com.clone.wanted.employment.Employment;
@@ -20,16 +22,17 @@ public class LikesService {
     private final UserRepository userRepository;
 
     public void changeLikes(long employmentId,long userId) {
+        User user = userRepository.findById(userId)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
         // 사용자가 첫 좋아요여서 like id가 없는 경우
         try{
-            Likes likes = likesRepository.findByUserUserId(userId).get();
+            Likes likes = likesRepository.findByUser(user).get();
         }catch (Exception e){
-            User user = userRepository.findById(userId).get();
             Employment employment = employmentRepository.findById(employmentId).get();
             Likes likesSave = new Likes(user, employment, false);
             likesRepository.save(likesSave);
         }
-        Likes likes2 = likesRepository.findByUserUserId(userId).get();
+        Likes likes2 = likesRepository.findByUser(user).get();
 
         // 사용자의 값이 false인 경우 즉 좋아요가 안 눌려져 있어서 좋아요를 누르는 상황
          if (likes2.getLikeStatus() == true) {

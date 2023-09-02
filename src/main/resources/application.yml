@@ -18,7 +18,7 @@ spring:
     hibernate:
 #      ddl-auto: create-drop
 #      ddl-auto: update
-    ddl-auto: create-drop
+      ddl-auto: create
     properties:
       hibernate:
         format_sql: true
@@ -29,8 +29,7 @@ spring:
       continue-on-error: true
 #      data-locations: data.sql
 
-
 jwt:
-  header: Authorization
-  secret: TestToken1234sadhfkjahlui3421o4798fshjkasdf
-  token-validity-in-seconds: 86400
+  secret-key: ${JWT_KEY}
+  token:
+    expired-time-ms: ${EXPIRATION_TIME}
