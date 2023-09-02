@@ -25,8 +25,9 @@ public class EmploymentController {
         return new BaseResponse();
     }
 
+
+
     //채용 공고 상세조회
-    /**Todo 좋아요 수 컬럼으로 추가해서 반환하기*/
     @GetMapping("/employments/{employmentId}")
     public BaseResponse<EmploymentDetailResDto> retrieveEmployment(@PathVariable("employmentId") long employmentId) throws Exception {
         EmploymentDetailResDto employmentResDto = employmentService.retrieveEmployment(employmentId);

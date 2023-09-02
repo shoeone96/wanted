@@ -5,6 +5,7 @@ import com.clone.wanted.Company.CompanyRepository;
 import com.clone.wanted.employment.requestDto.EmploymentReqDto;
 import com.clone.wanted.employment.responseDto.EmploymentAllResDto;
 import com.clone.wanted.employment.responseDto.EmploymentDetailResDto;
+import com.clone.wanted.likes.LikesRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -20,6 +21,7 @@ public class EmploymentService {
 
     private final EmploymentRepository employmentRepository;
     private final CompanyRepository companyRepository;
+    private final LikesRepository likesRepository;
 
     //채용공고 생성
     public void createEmployment (EmploymentReqDto employmentReqDto){
@@ -36,8 +38,8 @@ public class EmploymentService {
     public EmploymentDetailResDto retrieveEmployment(@PathVariable long employmentId) {
         Employment employment = employmentRepository.findById(employmentId).get();
         Company company = employment.getCompany();
-        //임시 like Num
-        int likeNum=5;
+
+        int likeNum=likesRepository.getLikeNum(employmentId);
 
         List<String> hashtagName = employmentRepository.findHashtagName(employmentId);
         List<String> skillStack = employmentRepository.findSkillStackName(employmentId);
