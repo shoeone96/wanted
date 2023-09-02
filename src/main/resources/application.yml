@@ -6,7 +6,7 @@ spring:
     name: wanted
 
   datasource:
-    url: jdbc:mysql://localhost:3306/${DB_DATABASE_NAME}
+    url: jdbc:mysql://${DATASOURCE_HOST}:3306/${DB_DATABASE_NAME}
     username: ${DB_USERNAME}
     password: ${DB_PASSWORD}
     driver-class-name: com.mysql.cj.jdbc.Driver # mysql 8버전
