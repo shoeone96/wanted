@@ -21,7 +21,7 @@ public class CompanyApplicationResponseDto {
     public static CompanyApplicationResponseDto of(Application application){
         return new CompanyApplicationResponseDto(
                 application.getEmployment().getId(),
-                application.getUser().getUsername(),
+                application.getUser().getEmail(),
                 application.getEmployment().getEmploymentTitle(),
                 application.getCreatedAt(),
                 application.getApplicationStatus().name());

@@ -45,6 +45,10 @@ public enum BaseResponseStatus {
      */
     USER_NOT_FOUND(false, 5000, "해당 유저를 찾을 수 없습니다."),
     REQUEST_NOT_ALLOWED(false, 5001, "해당 기능을 사용할 권한이 없습니다."),
+    EMAIL_ALREADY_SIGNED(false, 5002, "이미 가입한 회원입니다."),
+    EMAIL_CHECK_FAIL(false, 5003, "이메일 확인에 실패했습니다."),
+    USER_NAME_DUPLICATED(false, 5004, "중복된 닉네임입니다."),
+    INVALID_PASSWORD(false, 5005, "비밀번호 정보가 올바르지 않습니다."),
 
 
     /**
@@ -61,7 +65,8 @@ public enum BaseResponseStatus {
     /**
      * 8000 : Employment Exception
      */
-    COMPANY_NOT_FOUND(false, 8000, "해당 유저가 관리하는 회사 정보가 없습니다.");
+    COMPANY_NOT_FOUND(false, 8000, "해당 유저가 관리하는 회사 정보가 없습니다."),
+    INVALID_TOKEN(false, 8001, "유효하지 않은 토큰입니다.");
 
 
     private boolean isSuccess;

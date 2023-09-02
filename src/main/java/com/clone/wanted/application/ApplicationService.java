@@ -1,10 +1,10 @@
 package com.clone.wanted.application;
 
-import com.clone.wanted.Company.Company;
-import com.clone.wanted.Company.CompanyRepository;
-import com.clone.wanted.User.User;
-import com.clone.wanted.User.UserRepository;
-import com.clone.wanted.User.UserType;
+import com.clone.wanted.company.Company;
+import com.clone.wanted.company.CompanyRepository;
+import com.clone.wanted.user.User;
+import com.clone.wanted.user.UserRepository;
+import com.clone.wanted.user.UserType;
 import com.clone.wanted.application.requestDto.EstimateRequestDto;
 import com.clone.wanted.application.responseDto.CompanyApplicationResponseDto;
 import com.clone.wanted.application.responseDto.UserApplicationResponseDto;
@@ -44,7 +44,7 @@ public class ApplicationService {
     public void estimate(String email, EstimateRequestDto requestDto, Long employmentId) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
-        if(user.getUserType() == UserType.CORPORATE_USER) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
+        if(user.getUserType() == UserType.CORPORATE) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
         Employment employment = employmentRepository.findById(employmentId)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
         Application application = applicationRepository.findByUserAndEmployment(user, employment)
@@ -74,7 +74,7 @@ public class ApplicationService {
     public List<CompanyApplicationResponseDto> getCompanyApplications(String email, Long employmentId) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
-        if(user.getUserType() == UserType.CORPORATE_USER) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
+        if(user.getUserType() == UserType.CORPORATE) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
         Company company = companyRepository.findByUser(user)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.COMPANY_NOT_FOUND));
         if(company.getUser() != user) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);

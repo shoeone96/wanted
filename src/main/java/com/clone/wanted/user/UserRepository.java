@@ -1,4 +1,4 @@
-package com.clone.wanted.User;
+package com.clone.wanted.user;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
