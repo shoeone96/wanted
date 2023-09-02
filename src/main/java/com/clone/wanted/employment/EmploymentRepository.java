@@ -13,4 +13,10 @@ public interface EmploymentRepository extends JpaRepository<Employment,Long> {
 
     @Query(value = "select e.hashtag_name from employment_hashtag e where e.employment_id=:employment_id",nativeQuery = true)
     List<String> findHashtagName(@Param("employment_id") Long employmentId);
+
+
+    @Query(value = "select e.skill_name from employment_skill_stack e where e.employment_id=:employment_id",nativeQuery = true)
+    List<String> findSkillStackName(@Param("employment_id") Long employmentId);
+
+
 }

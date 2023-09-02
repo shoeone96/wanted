@@ -20,7 +20,6 @@ public class EmploymentService {
 
     private final EmploymentRepository employmentRepository;
     private final CompanyRepository companyRepository;
-    private final EmploymentHashtagRepository employmentHashtagRepository;
 
     //채용공고 생성
     public void createEmployment (EmploymentReqDto employmentReqDto){
@@ -40,9 +39,10 @@ public class EmploymentService {
         //임시 like Num
         int likeNum=5;
 
-        List<String> hashtagName = employmentHashtagRepository.findHashtagName(employmentId);
+        List<String> hashtagName = employmentRepository.findHashtagName(employmentId);
+        List<String> skillStack = employmentRepository.findSkillStackName(employmentId);
 
-        EmploymentDetailResDto employmentResDto = new EmploymentDetailResDto(employment,company,likeNum,hashtagName);
+        EmploymentDetailResDto employmentResDto = new EmploymentDetailResDto(employment,company,likeNum,hashtagName,skillStack);
 
         return employmentResDto;
     }
