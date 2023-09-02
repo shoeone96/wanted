@@ -15,34 +15,6 @@ public class SigninRequestDto {
 	private String name;
 	private String email;
 	private UserType userType;
+	private String phoneNumber;
 
-//	@NotNull
-//	@Size(min = 3, max = 50)
-//	private String username;
-//
-//	@JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
-//	@NotNull
-//	@Size(min = 3, max = 100)
-//	private String password;
-
-//	@NotNull
-//	private String name;
-//
-//	@NotNull
-//	private String email;
-//
-//	@NotNull
-//	private String phoneNumber;
-//
-//	@NotNull
-//	private LocalDate birthDate;
-//
-//	@Null
-//	private String jobStatus;
-//
-//	@Null
-//	private String jobGroup;
-//
-//	@NotNull
-//	private UserType userType;
 }
