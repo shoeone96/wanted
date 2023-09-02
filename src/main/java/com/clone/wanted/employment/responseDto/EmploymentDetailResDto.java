@@ -14,7 +14,9 @@ import java.util.List;
 public class EmploymentDetailResDto {
     private long employmentId;
     private String employmentTitle;
+    private String employmentContent;
     private String address;
+    private String region;
     private String deadline;
     private int applicantReward;
     private int recommenderReward;
@@ -28,7 +30,9 @@ public class EmploymentDetailResDto {
     public EmploymentDetailResDto(Employment employment,Company company,int likeNum,List<String> hashtagName,List<String> skillStack) {
         this.employmentId = employment.getId();
         this.employmentTitle = employment.getEmploymentTitle();
-        this.address = employment.getAddress();
+        this.employmentContent = employment.getEmploymentCon();
+        this.address = company.getAddress();
+        this.region=company.getRegion();
         this.deadline = employment.getDeadline();
         this.applicantReward = employment.getApplicantReward();
         this.recommenderReward = employment.getRecommenderReward();

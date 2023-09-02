@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
+@Embeddable
 @Entity
 public class Employment extends BaseEntity {
 
@@ -24,8 +25,8 @@ public class Employment extends BaseEntity {
     @JoinColumn(name="company_id")
     private Company company;
     private String employmentTitle;
-    private String employmentContents;
-    private String address;
+    @Column(name = "employment_con")
+    private String employmentCon;
     private String deadline;
     private int recommenderReward;
     private int applicantReward;
@@ -34,18 +35,15 @@ public class Employment extends BaseEntity {
     public Employment(Company company, EmploymentReqDto employmentReqDto) {
         this.company = company;
         this.employmentTitle = employmentReqDto.getEmploymentTitle();
-        this.employmentContents = employmentReqDto.getEmploymentTitle();
-        this.address = employmentReqDto.getAddress();
+        this.employmentCon = employmentReqDto.getEmploymentCon();
         this.deadline = employmentReqDto.getDeadline();
         this.recommenderReward = employmentReqDto.getRecommenderReward();
         this.applicantReward = employmentReqDto.getApplicantReward();
     }
 
-
     public void modifyEmployment(EmploymentReqDto employmentReqDto){
         this.employmentTitle = employmentReqDto.getEmploymentTitle();
-        this.employmentContents = employmentReqDto.getEmploymentTitle();
-        this.address = employmentReqDto.getAddress();
+        this.employmentCon = employmentReqDto.getEmploymentCon();
         this.deadline = employmentReqDto.getDeadline();
         this.recommenderReward = employmentReqDto.getRecommenderReward();
         this.applicantReward = employmentReqDto.getApplicantReward();
