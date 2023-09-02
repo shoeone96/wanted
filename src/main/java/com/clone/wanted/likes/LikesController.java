@@ -15,20 +15,21 @@ public class LikesController {
     public BaseResponse changeLikes(@PathVariable long employmentId){
         //Todo userId 나중에 PathVariable로 넘어올 것임 , 그 때 변경
         //UserId 임시값
-        long userId=1;
+        long userId=4;
         likesService.changeLikes(employmentId,userId);
 
         return new BaseResponse<>();
     }
 
-//    @GetMapping("/employment/{employmentId}/likes")
-//    public BaseResponse<LikesResDto> retrieveLikes(@PathVariable long employmentId){
-//        //UserId 임시값
-//        long userId=1;
-//        likesService.retrieveLikes(employmentId,userId);
-//
-//        return new BaseResponse<>();
-//    }
+    @GetMapping("/employment/{employmentId}/likes")
+    public BaseResponse<LikesResDto> retrieveLikes(@PathVariable long employmentId){
+        //UserId 임시값
+        long userId=1;
+        LikesResDto likesResDto = likesService.retrieveLikes(employmentId, userId);
+
+        return new BaseResponse<>(likesResDto);
+    }
+
 
 
     @GetMapping("/employment/{employmentId}/likes1")

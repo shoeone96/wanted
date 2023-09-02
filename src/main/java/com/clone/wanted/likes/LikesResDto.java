@@ -11,7 +11,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class LikesResDto {
-    private LikeModalResDto likeModalResDto;
+    private List<LikeModalResDto> likeModalResDto;
     private int likesNum;
 }
 
