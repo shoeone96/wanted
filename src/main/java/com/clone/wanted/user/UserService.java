@@ -40,6 +40,7 @@ public class UserService {
 				.name(signinRequestDto.getName())
 				.email(signinRequestDto.getEmail())
 				.userType(signinRequestDto.getUserType())
+				.phoneNumber(signinRequestDto.getPhoneNumber())
 				.activated(true)
 				.build();
 

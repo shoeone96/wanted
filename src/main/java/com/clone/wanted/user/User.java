@@ -30,6 +30,7 @@ public class User extends BaseEntity {
 	private String email;
 	@Column(length = 10)
 	private UserType userType;
+	private String phoneNumber;
 
 	@JsonIgnore
 	@Column(name = "activated")
