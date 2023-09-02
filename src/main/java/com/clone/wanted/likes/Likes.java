@@ -1,7 +1,7 @@
 package com.clone.wanted.likes;
 
 
-import com.clone.wanted.User.User;
+import com.clone.wanted.user.User;
 import com.clone.wanted.employment.Employment;
 import jakarta.persistence.*;
 import lombok.Getter;
@@ -29,5 +29,14 @@ public class Likes {
     private Boolean likeStatus;
 
 
+    public Likes(User user, Employment employment, Boolean likeStatus) {
+        this.user = user;
+        this.employment = employment;
+        this.likeStatus = likeStatus;
+    }
 
+
+    public void modifyLikes(Boolean likeStatus){
+        this.likeStatus = likeStatus;
+    }
 }

@@ -1,4 +1,4 @@
-package com.clone.wanted.employment;
+package com.clone.wanted.employment.requestDto;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonPropertyOrder;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
-import static com.clone.wanted.config.BaseResponseStatus.SUCCESS;
+import static com.clone.wanted.config.BaseResponseStatus.*;
 
 @Getter
 @AllArgsConstructor
@@ -29,11 +29,31 @@ public class BaseResponse<T> {//BaseResponse 객체를 사용할때 성공, 실�
         this.result = result;
     }
 
+
+    // 요청에 성공한 경우
+    public BaseResponse() {
+        this.isSuccess = SUCCESS.isSuccess();
+        this.message = SUCCESS.getMessage();
+        this.code = SUCCESS.getCode();
+        this.result = null;
+    }
+
+    public static BaseResponse<Void> success(){
+        return new BaseResponse<>();
+    }
+    public static <T> BaseResponse<T> success(T result){
+        return new BaseResponse<>(result);
+    }
+
     // 요청에 실패한 경우
     public BaseResponse(BaseResponseStatus status){
         this.isSuccess = status.isSuccess();
         this.message = status.getMessage();
         this.code = status.getCode();
+    }
+
+    public static BaseResponse<Void> error(BaseResponseStatus status){
+        return new BaseResponse<>(status);
     }
 
 

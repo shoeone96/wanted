@@ -1,9 +1,10 @@
 package com.clone.wanted.application;
 
 import com.clone.wanted.BaseEntity;
-import com.clone.wanted.User.User;
+import com.clone.wanted.user.User;
 import com.clone.wanted.employment.Employment;
 import jakarta.persistence.*;
+import lombok.AccessLevel;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
@@ -24,5 +25,19 @@ public class Application extends BaseEntity {
     private Employment employment;
     @Enumerated(EnumType.STRING)
     private ApplicationStatus applicationStatus;
+
+    private Application (User user, Employment employment){
+        this.user = user;
+        this.employment = employment;
+        this.applicationStatus = ApplicationStatus.ONGOING;
+    }
+
+    public void updateStatus(ApplicationStatus status){
+        this.applicationStatus = status;
+    }
+
+    public static Application newEnrollment(User user, Employment employment){
+        return new Application(user, employment);
+    }
 
 }
