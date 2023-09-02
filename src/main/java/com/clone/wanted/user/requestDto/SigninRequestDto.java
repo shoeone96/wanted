@@ -11,14 +11,9 @@ import java.time.LocalDate;
 @NoArgsConstructor
 public class SigninRequestDto {
 
-	private String username;
 	private String password;
 	private String name;
 	private String email;
-	private String phoneNumber;
-	private String birthDate;
-	private String jobStatus;
-	private String jobGroup;
 	private UserType userType;
 
 //	@NotNull

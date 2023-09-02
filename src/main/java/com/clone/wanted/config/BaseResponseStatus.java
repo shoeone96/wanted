@@ -65,7 +65,8 @@ public enum BaseResponseStatus {
     /**
      * 8000 : Employment Exception
      */
-    COMPANY_NOT_FOUND(false, 8000, "해당 유저가 관리하는 회사 정보가 없습니다."), ;
+    COMPANY_NOT_FOUND(false, 8000, "해당 유저가 관리하는 회사 정보가 없습니다."),
+    INVALID_TOKEN(false, 8001, "유효하지 않은 토큰입니다.");
 
 
     private boolean isSuccess;

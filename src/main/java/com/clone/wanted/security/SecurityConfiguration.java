@@ -1,86 +1,59 @@
 package com.clone.wanted.security;
 
-import jakarta.servlet.DispatcherType;
+
+import com.clone.wanted.user.UserService;
 import lombok.RequiredArgsConstructor;
-import org.springframework.boot.autoconfigure.security.servlet.PathRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+import org.springframework.beans.factory.annotation.Value;
+
 
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
-public class SecurityConfiguration {
+@EnableWebMvc
+public class SecurityConfiguration implements WebMvcConfigurer {
 
-	private final TokenProvider tokenProvider;
-	private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
-	private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
+	private final UserService userService;
+	@Value("${jwt.secret-key}")
+	private String key;
 
-	// PasswordEncoder는 BCryptPasswordEncoder를 사용
 	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+	public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+		http.cors().and()
+				.csrf().disable()
+				.authorizeHttpRequests()
+				.requestMatchers(
+						new AntPathRequestMatcher("/api/**")).permitAll()
+				.requestMatchers(
+						new AntPathRequestMatcher("/api/v1/users/join", "POST"),
+						new AntPathRequestMatcher("/api/v1/users/login", "POST")
+				).authenticated()
+				.and()
+				.sessionManagement()
+				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
+				.and()
+				.addFilterBefore(new JwtFilter(key, userService), UsernamePasswordAuthenticationFilter.class)
+				.exceptionHandling()
+				.authenticationEntryPoint(new CustomAuthenticationEntryPoint()); // 오류 발생 시 옮겨갈 수 있는 거 -> 이 부분 구현으로 오류 내용 등을 전달 가능;
+		return http.build();
 	}
-
-//	@Bean
-//	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-//		httpSecurity.csrf(AbstractHttpConfigurer::disable).exceptionHandling(Customizer.withDefaults())
-//				.authenticationEntryPoint(jwtAuthenticationEntryPoint)
-//				.accessDeniedHandler(jwtAccessDeniedHandler)
-//
-//				// enable h2-console
-//				.and()
-//				.headers()
-//				.frameOptions()
-//				.sameOrigin()
-//
-//				// 세션을 사용하지 않기 때문에 STATELESS로 설정
-//				.and().sessionManagement()
-//				.sessionCreationPolicy(SessionCreationPolicy.STATELESS)
-//
-//				.and().authorizeHttpRequests() // HttpServletRequest를 사용하는 요청들에 대한 접근제한을 설정하겠다.
-//				.requestMatchers("/api/authenticate").permitAll() // 로그인 api
-//				.requestMatchers("/api/signup").permitAll() // 회원가입 api
-//				.requestMatchers(PathRequest.toH2Console()).permitAll()// h2-console, favicon.ico 요청 인증 무시
-//				.requestMatchers("/favicon.ico").permitAll()
-//				.anyRequest().authenticated() // 그 외 인증 없이 접근X
-//
-//				.and()
-//				.apply(new JwtSecurityConfig(tokenProvider)); // JwtFilter를 addFilterBefore로 등록했던 JwtSecurityConfig class 적용
-//
-//		return httpSecurity.build();
-//	}
-
-	@Bean
-	public SecurityFilterChain filterChain(HttpSecurity httpSecurity) throws Exception {
-		return httpSecurity
-				//csrf 공격에 대한 옵션 끄기
-				.csrf(AbstractHttpConfigurer::disable)
-				.authorizeHttpRequests((auuthorizeRequest) -> {
-					auuthorizeRequest.requestMatchers("/user/**").authenticated();
-
-					auuthorizeRequest.requestMatchers("/manager/**")
-							.hasAnyRole("ADMIN", "MANAGER");
-
-					auuthorizeRequest.requestMatchers("/admin/**")
-							.hasRole("ADMIN");
-
-					auuthorizeRequest.anyRequest().permitAll();
-
-
-				})
-
-				.formLogin((formLogin) -> {
-					formLogin.loginPage("/login");
-				})
-				.build();
+	@Override
+	public void addCorsMappings(final CorsRegistry registry) {
+		registry.addMapping("/**")
+				.allowedOrigins("http://localhost:3000")
+				.allowedMethods("GET", "POST", "DELETE", "PUT", "PATCH")
+				.allowedHeaders("*")
+				.maxAge(3600);
 	}
 }
 

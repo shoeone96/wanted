@@ -2,6 +2,7 @@ package com.clone.wanted.likes;
 
 
 import com.clone.wanted.config.BaseResponse;
+import com.clone.wanted.likes.responseDto.LikesResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,34 +13,24 @@ public class LikesController {
     private final LikesService likesService;
 
     @PostMapping("/employment/{employmentId}/likes")
-    public BaseResponse changeLikes(@PathVariable long employmentId){
+    public BaseResponse<Void> changeLikes(@PathVariable long employmentId){
         //Todo userId 나중에 PathVariable로 넘어올 것임 , 그 때 변경
         //UserId 임시값
         long userId=3;
         likesService.changeLikes(employmentId,userId);
 
-        return new BaseResponse<>();
+        return BaseResponse.success();
     }
 
     @GetMapping("/employment/{employmentId}/likes")
     public BaseResponse<LikesResDto> retrieveLikes(@PathVariable long employmentId){
+        //Todo userId 나중에 PathVariable로 넘어올 것임 , 그 때 변경
         //UserId 임시값
         long userId=1;
         LikesResDto likesResDto = likesService.retrieveLikes(employmentId, userId);
 
-        return new BaseResponse<>(likesResDto);
+        return BaseResponse.success(likesResDto);
     }
-
-
-    @GetMapping("/employment/{employmentId}/likes1")
-    public int getLikes(@PathVariable long employmentId){
-        //UserId 임시
-        return likesService.getLikeNum(employmentId);
-    }
-
-
-
-
 
 }
 

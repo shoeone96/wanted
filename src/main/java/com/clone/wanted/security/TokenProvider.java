@@ -19,7 +19,7 @@ public class TokenProvider{
 		return usernameByToken.equals(userName) && !isExpired(token, key);
 	}
 	public static String getUserName(String token, String key){
-		return extractClaims(token, key).get("username", String.class);
+		return extractClaims(token, key).get("email", String.class);
 	}
 
 	// 현재 시간보다 만료 시간이 긴지 아닌지 여부로 토큰 만료 시간 확인
@@ -35,9 +35,9 @@ public class TokenProvider{
 	}
 
 	// token username 넣고, key는 userName 넣은 값을 암호화, 유효 기간
-	public static String generateToken(String userName, String key, long expiredTimeMs){
+	public static String generateToken(String email, String key, long expiredTimeMs){
 		Claims claims = Jwts.claims();
-		claims.put("nickname", userName);
+		claims.put("email", email);
 
 		return Jwts.builder()
 				.setClaims(claims)
