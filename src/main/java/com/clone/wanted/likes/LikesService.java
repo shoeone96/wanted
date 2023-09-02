@@ -51,7 +51,6 @@ public class LikesService {
 
         int likeNum = likesRepository.getLikeNum(employmentId);
 
-
         List<LikeModalResDto> likeModalResDtos = new ArrayList<>();
         for (Object[] result : results) {
             Long userId1 = (Long) result[0];
@@ -60,7 +59,6 @@ public class LikesService {
             likeModalResDtos.add(likeModalResDto);
         }
         return new LikesResDto(likeModalResDtos, likeNum);
-
     }
 
 
@@ -68,9 +66,5 @@ public class LikesService {
         int likeNum = likesRepository.getLikeNum(employmentId);
         return likeNum;
     }
-
-
-
-
 
 }
