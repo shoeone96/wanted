@@ -18,30 +18,20 @@ import java.util.List;
 public class UserAuth implements UserDetails {
     private Long userId;
     //유저 아이디
-    private String username;
     @JsonIgnore
     private String password;
     //실제 이름
     private String name;
     private String email;
-    private String phoneNumber;
-    private String birthDate;
-    private String jobStatus;
-    private String jobGroup;
     private UserType userType;
 
 
     public static UserAuth fromUser(User user){
         return new UserAuth(
                 user.getId(),
-                user.getUsername(),
                 user.getPassword(),
                 user.getName(),
                 user.getEmail(),
-                user.getPhoneNumber(),
-                user.getBirthDate(),
-                user.getJobStatus(),
-                user.getJobGroup(),
                 user.getUserType()
         );
     }

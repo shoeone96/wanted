@@ -29,7 +29,7 @@ import java.io.IOException;
 public class JwtFilter extends OncePerRequestFilter {
 
 	@Value("${jwt.secret-key}")
-	private String secretKey;
+	private final String secretKey;
 	private final UserService userService;
 
 	// 실제 필터릴 로직

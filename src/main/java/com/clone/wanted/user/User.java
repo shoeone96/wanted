@@ -22,22 +22,12 @@ public class User extends BaseEntity {
 	@Column(name = "user_id")
 	private Long id;
 	//유저 아이디
-	@Column(unique = true)
-	private String username;
-	@JsonIgnore
 	private String password;
 	//실제 이름
 	@Column(length = 20)
 	private String name;
 	@Column(length = 100, unique = true)
 	private String email;
-	@Column( length = 15)
-	private String phoneNumber;
-	private String birthDate;
-	@Column(length = 20)
-	private String jobStatus;
-	@Column(length = 30)
-	private String jobGroup;
 	@Column(length = 10)
 	private UserType userType;
 
