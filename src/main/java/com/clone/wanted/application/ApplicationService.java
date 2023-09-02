@@ -26,6 +26,7 @@ public class ApplicationService {
     private final UserRepository userRepository;
     private final EmploymentRepository employmentRepository;
     private final ApplicationRepository applicationRepository;
+
     private final CompanyRepository companyRepository;
     public void enroll(String email, Long employmentId) {
         User user = userRepository.findByEmail(email)

@@ -29,6 +29,7 @@ public class User extends BaseEntity {
 	@Column(length = 100, unique = true)
 	private String email;
 	@Column(length = 10)
+	@Enumerated(EnumType.STRING)
 	private UserType userType;
 	private String phoneNumber;
 
