@@ -42,15 +42,44 @@ public class ApplicationService {
         applicationRepository.save(Application.newEnrollment(user, employment));
     }
 
+//    public void estimate(String email, EstimateRequestDto requestDto, Long employmentId) {
+//        User user = userRepository.findByEmail(email)
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+//
+//        if(user.getUserType() == UserType.CORPORATE) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
+//
+//        Employment employment = employmentRepository.findById(employmentId)
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
+//
+//        Application application = applicationRepository.findByUserAndEmployment(user, employment)
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
+//
+//        application.updateStatus(ApplicationStatus.returnStatus(requestDto.getApplicationStatus()));
+//    }
+
     public void estimate(String email, EstimateRequestDto requestDto, Long employmentId) {
         User user = userRepository.findByEmail(email)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
-        if(user.getUserType() == UserType.CORPORATE) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
+
+        if(user.getUserType() != UserType.CORPORATE) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
+
         Employment employment = employmentRepository.findById(employmentId)
                 .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
-        Application application = applicationRepository.findByUserAndEmployment(user, employment)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
-        application.updateStatus(ApplicationStatus.returnStatus(requestDto.getApplicationStatus()));
+
+        List<Application> applications = applicationRepository.findAllByUserAndEmployment(user, employment);
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
+
+        Application onGoingApplication = null;
+        for (Application application: applications){
+            if(application.getApplicationStatus() == ApplicationStatus.ONGOING){
+                onGoingApplication = application;
+                break;
+            }
+        }
+
+        if(onGoingApplication == null) throw new BaseException(BaseResponseStatus.APPLICATION_NOT_FOUND);
+
+        onGoingApplication.updateStatus(ApplicationStatus.returnStatus(requestDto.getApplicationStatus()));
     }
 
     public void cancel(String email, Long employmentId) {
@@ -72,18 +101,39 @@ public class ApplicationService {
                 .toList();
     }
 
-    public List<CompanyApplicationResponseDto> getCompanyApplications(String email, Long employmentId) {
-        User user = userRepository.findByEmail(email)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
-        if(user.getUserType() == UserType.CORPORATE) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
-        Company company = companyRepository.findByUser(user)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.COMPANY_NOT_FOUND));
-        if(company.getUser() != user) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
-        Employment employment = employmentRepository.findById(employmentId)
-                .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
-        return applicationRepository.findAllByEmployment(employment)
-                .stream()
-                .map(CompanyApplicationResponseDto::of)
-                .toList();
+//    public List<CompanyApplicationResponseDto> getCompanyApplications(String email, Long employmentId) {
+//        User user = userRepository.findByEmail(email)
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+//        if(user.getUserType() == UserType.CORPORATE) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
+//        Company company = companyRepository.findByUser(user)
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.COMPANY_NOT_FOUND));
+//        if(company.getUser() != user) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
+//        Employment employment = employmentRepository.findById(employmentId)
+//                .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
+//        return applicationRepository.findAllByEmployment(employment)
+//                .stream()
+//                .map(CompanyApplicationResponseDto::of)
+//                .toList();
+//    }
+public List<CompanyApplicationResponseDto> getCompanyApplications(String email, Long employmentId) {
+    User user = userRepository.findByEmail(email)
+            .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+    if(user.getUserType() != UserType.CORPORATE) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
+
+    List<Company> company = companyRepository.findAllByUser(user);
+
+    if(company.isEmpty()) throw new BaseException(BaseResponseStatus.COMPANY_NOT_FOUND);
+
+    for(Company companyEle : company){
+        if(companyEle.getUser() != user) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
     }
+
+    Employment employment = employmentRepository.findById(employmentId)
+            .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
+
+    return applicationRepository.findAllByEmployment(employment)
+            .stream()
+            .map(CompanyApplicationResponseDto::of)
+            .toList();
+}
 }
