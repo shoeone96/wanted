@@ -1,17 +1,20 @@
 package com.clone.wanted.user;
 
+import com.clone.wanted.application.Application;
+import com.clone.wanted.application.ApplicationStatus;
 import com.clone.wanted.config.BaseException;
 import com.clone.wanted.config.BaseResponseStatus;
+import com.clone.wanted.employment.Employment;
 import com.clone.wanted.user.requestDto.LoginRequestDto;
 import com.clone.wanted.security.TokenProvider;
 import com.clone.wanted.user.requestDto.SigninRequestDto;
+import com.clone.wanted.user.requestDto.UserDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import java.util.Optional;
 
 @Service
 @Transactional
@@ -44,13 +47,10 @@ public class UserService {
 				.activated(true)
 				.build();
 
-//		AuthorityRepository.save(authority);
 		userRepository.save(user);
 	}
 
 	// 유저,권한 정보를 가져오는 메소드
-
-
 	public String getUserByEmail(String email){
 		userRepository.findByEmail(email)
 				.orElseThrow(() -> new BaseException(BaseResponseStatus.EMAIL_CHECK_FAIL));
@@ -64,11 +64,25 @@ public class UserService {
 			throw new BaseException(BaseResponseStatus.INVALID_PASSWORD);
 		}
 		return  TokenProvider.generateToken(user.getEmail(), secretKey, expiredTimeMs);
-
 	}
 
 	public UserAuth loadUserByUserName(String email) {
 		return userRepository.findByEmail(email).map(UserAuth::fromUser).orElseThrow(() ->
 				new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+	}
+
+	public void userDelete(String email) {
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+
+		userRepository.delete(user);
+	}
+
+	public void userUpdate(String email, UserDto userDto) {
+		User user = userRepository.findByEmail(email)
+				.orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+		userDto.setPassword(encoder.encode(userDto.getPassword()));
+		user.updateUser(userDto);
+		userRepository.save(user);
 	}
 }

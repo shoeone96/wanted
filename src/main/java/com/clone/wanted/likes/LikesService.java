@@ -1,7 +1,10 @@
 package com.clone.wanted.likes;
 
+import com.clone.wanted.application.responseDto.CompanyApplicationResponseDto;
 import com.clone.wanted.config.BaseException;
+import com.clone.wanted.config.BaseResponse;
 import com.clone.wanted.config.BaseResponseStatus;
+import com.clone.wanted.likes.responseDto.LikesDto;
 import com.clone.wanted.user.User;
 import com.clone.wanted.user.UserRepository;
 import com.clone.wanted.employment.Employment;
@@ -11,9 +14,12 @@ import com.clone.wanted.likes.responseDto.LikesResDto;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 @Transactional
@@ -71,4 +77,12 @@ public LikesResDto retrieveLikes(long employmentId) {
         return likeNum;
     }
 
+    //test -> 좋아요 정보 조회
+    public List<LikesDto> retrieveLikeAll() {
+
+        return likesRepository.findAll()
+                .stream()
+                .map(LikesDto::of)
+                .toList();
+    }
 }

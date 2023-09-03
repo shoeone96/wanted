@@ -1,6 +1,9 @@
 package com.clone.wanted.user;
 
 import com.clone.wanted.BaseEntity;
+import com.clone.wanted.employment.requestDto.EmploymentReqDto;
+import com.clone.wanted.user.requestDto.SigninRequestDto;
+import com.clone.wanted.user.requestDto.UserDto;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import jakarta.persistence.*;
 import lombok.*;
@@ -37,4 +40,10 @@ public class User extends BaseEntity {
 	@Column(name = "activated")
 	private boolean activated;
 
+	public void updateUser(UserDto userReqDto){
+		this.password = userReqDto.getPassword();
+		this.name = userReqDto.getName();
+		this.email = userReqDto.getEmail();
+		this.phoneNumber = userReqDto.getPhoneNumber();
+	}
 }
