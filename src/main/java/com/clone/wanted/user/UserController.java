@@ -5,9 +5,11 @@ import com.clone.wanted.config.BaseResponseStatus;
 import com.clone.wanted.user.requestDto.LoginRequestDto;
 import com.clone.wanted.user.requestDto.SigninRequestDto;
 import com.clone.wanted.user.requestDto.EmailRequestDto;
+import com.clone.wanted.user.requestDto.UserDto;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -29,6 +31,7 @@ public class UserController {
 		return BaseResponse.success(userService.getUserByEmail(emailRequestDto.getEmail()));
 	}
 
+	// 로그인 기능
 	@PostMapping("/users/login")
 	public BaseResponse<String> authorize(@RequestBody LoginRequestDto loginRequestDto) {
 
@@ -36,4 +39,16 @@ public class UserController {
 
 	}
 
+	// 회원 탈퇴 기능
+	@DeleteMapping("/users")
+	public BaseResponse<Void> userDelete(Authentication authentication){
+		userService.userDelete(authentication.getName());
+		return BaseResponse.success();
+	}
+
+	@PutMapping("/users")
+	public BaseResponse<Void> userUpdate(Authentication authentication, @RequestBody UserDto userDto){
+		userService.userUpdate(authentication.getName(), userDto);
+		return BaseResponse.success();
+	}
 }

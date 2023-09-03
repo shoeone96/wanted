@@ -115,25 +115,25 @@ public class ApplicationService {
 //                .map(CompanyApplicationResponseDto::of)
 //                .toList();
 //    }
-public List<CompanyApplicationResponseDto> getCompanyApplications(String email, Long employmentId) {
-    User user = userRepository.findByEmail(email)
-            .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
-    if(user.getUserType() != UserType.CORPORATE) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
+    public List<CompanyApplicationResponseDto> getCompanyApplications(String email, Long employmentId) {
+        User user = userRepository.findByEmail(email)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.USER_NOT_FOUND));
+        if(user.getUserType() != UserType.CORPORATE) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
 
-    List<Company> company = companyRepository.findAllByUser(user);
+        List<Company> company = companyRepository.findAllByUser(user);
 
-    if(company.isEmpty()) throw new BaseException(BaseResponseStatus.COMPANY_NOT_FOUND);
+        if(company.isEmpty()) throw new BaseException(BaseResponseStatus.COMPANY_NOT_FOUND);
 
-    for(Company companyEle : company){
-        if(companyEle.getUser() != user) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
+        for(Company companyEle : company){
+            if(companyEle.getUser() != user) throw new BaseException(BaseResponseStatus.REQUEST_NOT_ALLOWED);
+        }
+
+        Employment employment = employmentRepository.findById(employmentId)
+                .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
+
+        return applicationRepository.findAllByEmployment(employment)
+                .stream()
+                .map(CompanyApplicationResponseDto::of)
+                .toList();
     }
-
-    Employment employment = employmentRepository.findById(employmentId)
-            .orElseThrow(() -> new BaseException(BaseResponseStatus.EMPLOYMENT_NOT_FOUND));
-
-    return applicationRepository.findAllByEmployment(employment)
-            .stream()
-            .map(CompanyApplicationResponseDto::of)
-            .toList();
-}
 }
