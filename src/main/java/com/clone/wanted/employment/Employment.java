@@ -4,6 +4,7 @@ package com.clone.wanted.employment;
 import com.clone.wanted.BaseEntity;
 import com.clone.wanted.company.Company;
 import com.clone.wanted.employment.requestDto.EmploymentReqDto;
+import com.clone.wanted.user.User;
 import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -21,12 +22,20 @@ public class Employment extends BaseEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "employment_id")
     private Long id;
+
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="company_id")
     private Company company;
     private String employmentTitle;
+
     @Column(name = "employment_con")
     private String employmentCon;
+
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name="user_id")
+    private User user;
+
     private String deadline;
     private int recommenderReward;
     private int applicantReward;
