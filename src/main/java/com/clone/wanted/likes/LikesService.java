@@ -37,7 +37,7 @@ public class LikesService {
         Likes likes2 = likesRepository.findByUser(user).get();
 
         // 사용자의 값이 false인 경우 즉 좋아요가 안 눌려져 있어서 좋아요를 누르는 상황
-         if (likes2.getLikeStatus() == true) {
+        if (likes2.getLikeStatus() == true) {
             Likes likesTrue = likesRepository.findById(likes2.getId()).get();
             likesTrue.modifyLikes(false);
             likesRepository.save(likesTrue);
@@ -50,22 +50,21 @@ public class LikesService {
         }
     }
 
-    public LikesResDto retrieveLikes(long employmentId, String email) {
-        List<Object[]> results = likesRepository.getModal(employmentId);
-        //dto로 변환
+public LikesResDto retrieveLikes(long employmentId) {
+    List<Object[]> results = likesRepository.getModal(employmentId);
+    //dto로 변환
 
-        int likeNum = likesRepository.getLikeNum(employmentId);
+    int likeNum = likesRepository.getLikeNum(employmentId);
 
-        List<LikeModalResDto> likeModalResDtos = new ArrayList<>();
-        for (Object[] result : results) {
-            Long userId1 = (Long) result[0];
-            String userName = (String) result[1];
-            LikeModalResDto likeModalResDto = new LikeModalResDto(userId1, userName);
-            likeModalResDtos.add(likeModalResDto);
-        }
-        return new LikesResDto(likeModalResDtos, likeNum);
+    List<LikeModalResDto> likeModalResDtos = new ArrayList<>();
+    for (Object[] result : results) {
+        Long userId1 = (Long) result[0];
+        String userName = (String) result[1];
+        LikeModalResDto likeModalResDto = new LikeModalResDto(userId1, userName);
+        likeModalResDtos.add(likeModalResDto);
     }
-
+    return new LikesResDto(likeModalResDtos, likeNum);
+}
 
     public int getLikeNum(long employmentId){
         int likeNum = likesRepository.getLikeNum(employmentId);

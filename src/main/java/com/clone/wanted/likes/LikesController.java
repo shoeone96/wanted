@@ -19,10 +19,10 @@ public class LikesController {
         return BaseResponse.success();
     }
 
-    @GetMapping("/employment/{employmentId}/likes")
-    public BaseResponse<LikesResDto> retrieveLikes(Authentication authentication, @PathVariable long employmentId){
-        return BaseResponse.success(likesService.retrieveLikes(employmentId, authentication.getName()));
-    }
+@GetMapping("/employment/{employmentId}/likes")
+public BaseResponse<LikesResDto> retrieveLikes(@PathVariable long employmentId){
+    return BaseResponse.success(likesService.retrieveLikes(employmentId));
+}
 
 }
 
