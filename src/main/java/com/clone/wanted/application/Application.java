@@ -26,6 +26,9 @@ public class Application extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private ApplicationStatus applicationStatus;
 
+
+
+
     private Application (User user, Employment employment){
         this.user = user;
         this.employment = employment;
