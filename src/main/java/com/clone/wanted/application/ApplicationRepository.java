@@ -11,7 +11,9 @@ import java.util.Optional;
 @Repository
 interface ApplicationRepository extends JpaRepository<Application, Long> {
 
-    Optional<Application> findByUserAndEmployment(User suer, Employment employment);
+    Optional<Application> findByUserAndEmployment(User user, Employment employment);
     List<Application> findAllByUser(User user);
     List<Application> findAllByEmployment(Employment employment);
+    List<Application> findAllByUserAndEmployment(User user, Employment employment);
+
 }

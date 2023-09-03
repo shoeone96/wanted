@@ -35,5 +35,9 @@ jwt:
   token:
     expired-time-ms: ${EXPIRATION_TIME}
 
-
+#INSERT INTO employment (company_id, user_id, employment_title, employment_con, deadline, recommender_reward, applicant_reward)
+#VALUES
+#(1, 4, '더미 채용 제목 7', '더미 채용 내용 7', '2023-12-31', 1000, 500),
+#(2, 4, '더미 채용 제목 8', '더미 채용 내용 8', '2023-12-31', 800, 400),
+#(3, 4, '더미 채용 제목 9', '더미 채용 내용 9', '2023-12-31', 1200, 600);
 
